@@ -3,13 +3,24 @@
 <body>
 
   <p>Password:</p> <input type="password" name="pwd" id="pswrd" maxlength="18"><br>
-  <input type="submit" onclick="alert('sss')">
+  <input type="submit" onclick="login()">
 
 
 <script>
-function login() {
-  document.getElementById("myText").value = "Johnny Bravo";
-}
+  var loggedIn = false;
+  var passcode = "test";
+  function login() {
+    var input = document.getElementById("pswrd").value;
+    
+    if(input == passcode){
+    	alert('ssss');
+    	
+    }
+    
+    //document.getElementById("pswrd").value = "Johnny Bravo";
+	
+	
+  }
 </script>
 
 </body>
