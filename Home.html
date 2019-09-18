@@ -3,13 +3,26 @@
 
 <style>
 body {
-
-	background-color: #F0F3F4;
+	background-color: yellow;
+	background-image: linear-gradient(red, yellow);
+	background-repeat: no-repeat, repeat;
+    background-size: 100% 6000%;
 
 }
+#LogInPadding{
+  background-color: DodgerBlue;
+  padding: 25px;
 
+  border-radius: 5px;
+  position: fixed;
+
+  left: 35%;
+  bottom: 30%;
+}
 #ShowOnLogin {
-  background-color: #1C2833;
+  border-radius: 25px;
+
+  background-color: DodgerBlue;
   color: black;
   
   padding: 40px;
@@ -21,10 +34,10 @@ body {
 
 
 
-
+<div id="LogInPadding">
   <p id="RemoveOnLogIn">Password:</p> <input type="password" name="pwd" id="pswrd" id="RemoveOnLogIn" maxlength="18"><br>
   <input type="submit" id="RemoveOnLogIn" onclick="login()">
-
+</div>
 
 
 
@@ -33,7 +46,14 @@ body {
 
   
 
- <p id="ShowOnLogin">Congrats you got the password correct</p>
+ <div id="ShowOnLogin">Congrats you got the password correct
+ 
+ 
+
+
+
+ 
+ </div>
 
 
 
@@ -61,6 +81,8 @@ body {
 		document.getElementById("ShowOnLogin").hidden=false
 
         			  document.getElementById("ShowOnLogin").style.visibility="visible";
+		document.getElementById("LogInPadding").hidden=true;
+                      
 
     }
 
