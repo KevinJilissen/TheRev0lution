@@ -18,6 +18,7 @@ body {
 
   left: 35%;
   bottom: 30%;
+  box-shadow: 10px 10px;
 }
 #ShowOnLogin {
   border-radius: 25px;
@@ -28,6 +29,17 @@ body {
   padding: 40px;
   text-align: center;
 }
+.loginB {
+	width:100%;
+	border-radius: 25px;
+    background-color: white;
+
+}
+#RemoveOnLogIn {
+
+  
+  text-align: center;
+}
 </style>
 <body id="body">
 	<title>Google Drive</title>
@@ -35,8 +47,8 @@ body {
 
 
 <div id="LogInPadding">
-  <p id="RemoveOnLogIn">Password:</p> <input type="password" name="pwd" id="pswrd" id="RemoveOnLogIn" maxlength="18"><br>
-  <input type="submit" id="RemoveOnLogIn" onclick="login()">
+  <h2 id="RemoveOnLogIn"><b>Login:</b></h2> <input type="password" name="pwd" id="pswrd" id="RemoveOnLogIn" maxlength="18"><br><br>
+  <input type="submit" id="RemoveOnLogIn" class="loginB" onclick="login()">
 </div>
 
 
