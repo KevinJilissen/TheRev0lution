@@ -24,13 +24,18 @@ body {
 }
 #ShowOnLogin {
 
+
+}
+div[type=Alert]{
   background-color: white;
   box-shadow: -10px 0px yellow;
 
   color: black;
   
-  padding: 40px;
+  padding: 20px;
   text-align: center;
+
+
 }
 .loginB {
 	width:100%;
@@ -38,7 +43,16 @@ body {
     background-color: white;
 
 }
-input {
+input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=submit]{
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -76,14 +90,16 @@ input {
   
 
  <div id="ShowOnLogin">
+ 
+ 
+ <div type = "Alert">
  <h3>Warning:</h3>
  <p>This site is under construction, but will soon be the home for the "Revolution", come back here for updates, and more</p>
+ </div>
  
-
  
-
-
-
+ 
+ 
  
  </div>
 
