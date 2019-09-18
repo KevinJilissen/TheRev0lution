@@ -16,8 +16,10 @@ body {
   border-radius: 5px;
   position: fixed;
 
-  left: 45%;
-  bottom: 35%;
+  left: 25%;
+  bottom: 25%;
+  width:50%;
+  height:50%;
   box-shadow: 10px 10px;
 }
 #ShowOnLogin {
@@ -36,11 +38,23 @@ body {
     background-color: white;
 
 }
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 #RemoveOnLogIn {
 
   
   text-align: center;
+
 }
+
 </style>
 
 
@@ -50,7 +64,7 @@ body {
 
 
 <div id="LogInPadding">
-  <h2 id="RemoveOnLogIn"><b>Login:</b></h2> <input type="password" name="pwd" id="pswrd" id="RemoveOnLogIn" maxlength="18"><br><br>
+  <h2 id="RemoveOnLogIn"><b>Login:</b></h2> <input type="password"  name="pwd" id="pswrd" id="RemoveOnLogIn" maxlength="18"><br><br>
   <input type="submit" id="RemoveOnLogIn" class="loginB" onclick="login()">
 </div>
 
