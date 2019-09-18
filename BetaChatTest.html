@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <title>Chatroom</title>
+    <link rel="stylesheet" href="style.css">
+    <script type='text/javascript' src='https://api2.scaledrone.com/assets/scaledrone.min.js'></script>
+    <script type='text/javascript' src="script.js"></script>
+  </head>
+  <style>
+  body, input {
+  font-size: 17px;
+}
+
+.message {
+  margin: 15px 0;
+}
+
+.input-area {
+  display: flex;
+}
+
+.input {
+  width: 100%;
+  line-height: 40px;
+  border: 2px solid #C3C3C3;
+  border-radius: 8px;
+  padding: 0 15px;
+}
+
+.input.name {
+  flex-basis: 200px;
+  flex-grow: 0;
+  margin-right: 5px;
+}
+
+.input.content {
+  flex-grow: 1;
+  margin-right: 5px;
+}
+
+.input.button {
+  flex-basis: 120px;
+  flex-grow: 0;
+}
+
+  </style>
+  <body>
+    <div class="text-area"></div>
+    <form class="input-area" onsubmit="onSubmitForm(); return false;">
+      <input type="text" class="input name" placeholder="Name..">
+      <input type="text" class="input content" placeholder="Message..">
+      <input type="submit" class="input button" value="Send">
+    </form>
+  </body>
+  <script>
+  
+  var drone = new ScaleDrone('JOxaLWWctOB0GfdI');
+
+drone.on('open', function (error) {
+  if (error) return console.error(error);
+
+  var room = drone.subscribe('Ananimoose');
+
+  room.on('open', function (error) {
+    if (error) return console.error(error);
+    console.log('Connected to room');
+  });
+
+  room.on('data', addMessageToScreen);
+});
+
+
+
+drone.on('open', function (error) {
+  if (error) return console.error(error);
+
+  var room = drone.subscribe('general-chat');
+
+  room.on('open', function (error) {
+    if (error) return console.error(error);
+    console.log('Connected to room');
+  });
+
+  room.on('data', addMessageToScreen);
+});
+
+function onSubmitForm() {
+  // This gets called as form is submitted
+}
+
+function addMessageToScreen(message) {
+  var div = document.createElement('div');
+  div.innerHTML = '<b>' + message.name + '</b>: ' + message.content;
+  div.classList.add('message');
+  document.querySelector('.text-area').appendChild(div);
+}
+
+function onSubmitForm(event) {
+  var nameEl = document.querySelector('.input.name')
+    , contentEl = document.querySelector('.input.content');
+
+  if (nameEl.value && contentEl.value) {
+    sendMessageToScaleDrone(nameEl.value, contentEl.value);
+    contentEl.value = '';
+  }
+}
+
+function sendMessageToScaleDrone(name, content) {
+  drone.publish({
+    room: 'general-chat',
+    message: {
+      name: name,
+      content: content
+    }
+  });
+}
+
+function addMessageToScreen(message) {
+  var div = document.createElement('div');
+  div.innerHTML = '<b>' + message.name + '</b>: ' + message.content;
+  div.classList.add('message');
+  document.querySelector('.text-area').appendChild(div);
+}
+  
+  </script>
+</html>
