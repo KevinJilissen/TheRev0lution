@@ -353,12 +353,14 @@ function addMessageToScreen(message) {
   var msgToAdd;
   var VisualName;
   var VisualContent;
+  
+  
 
   
       VisualName = '<b>' + message.name + '</b>: ';
     VisualContent = message.content;
-  if(message.name.includes('TestBot')){
-    VisualName = '<i><b>' + message.name + '</i>  &#129302; </b>: ';
+  if(message.name.includes('TestBot1234')){
+    VisualName = '<i><b>' + 'TestBot' + '</i>  &#129302; </b>: ';
     VisualContent = message.content;
 
   }
