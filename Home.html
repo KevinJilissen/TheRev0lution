@@ -366,25 +366,29 @@ function addMessageToScreen(message) {
    
    
      //EMOJI STUFF
-  if(message.content.includes(':)')){
-    var SwapedMsg = message.content.replace(":)", "&#x1F600;");
+  if(VisualContent.includes(':)')){
+    var SwapedMsg = VisualContent.replace(":)", "&#x1F600;");
 
     VisualContent = SwapedMsg;
 
   }
-  if(message.content.includes(':P')){
-    var SwapedMsg = message.content.replace(":P", "&#128523;");
+  if(VisualContent.includes(':P')){
+    var SwapedMsg = VisualContent.replace(":P", "&#128523;");
     VisualContent = SwapedMsg;
   }
-  if(message.content.includes(':|')){
-    var SwapedMsg = message.content.replace(":|", "&#128528;");
+  if(VisualContent.includes(':|')){
+    var SwapedMsg = VisualContent.replace(":|", "&#128528;");
     VisualContent = SwapedMsg;
   }
-  if(message.content.includes('-_-')){
-    var SwapedMsg = message.content.replace("-_-", "&#128529;");
+  if(VisualContent.includes('-_-')){
+    var SwapedMsg = VisualContent.replace("-_-", "&#128529;");
     VisualContent = SwapedMsg;
   }
-  
+  if(VisualContent.includes(';)')){
+    var SwapedMsg = VisualContent.replace(";)", "&#128521;");
+    VisualContent = SwapedMsg;
+  }
+  	
   
   //URLS
   if(message.content.includes('http')){
@@ -409,7 +413,7 @@ function addMessageToScreen(message) {
   document.querySelector('.text-area').appendChild(div);
   
   
-  //autoScroll
+  //autoScroll to bottom
 	window.scrollTo(0, 100000000000);	
 }
 
