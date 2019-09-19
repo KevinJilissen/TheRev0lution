@@ -326,12 +326,6 @@ function onSubmitForm() {
   // This gets called as form is submitted
 }
 
-function addMessageToScreen(message) {
-  var div = document.createElement('div');
-  div.innerHTML = '<b>' + message.name + '</b>: ' + message.content;
-  div.classList.add('message');
-  document.querySelector('.text-area').appendChild(div);
-}
 
 function onSubmitForm(event) {
   var nameEl = document.querySelector('.input.name')
@@ -355,7 +349,44 @@ function sendMessageToScaleDrone(name, content) {
 
 function addMessageToScreen(message) {
   var div = document.createElement('div');
-  div.innerHTML = '<b>' + message.name + '</b>: ' + message.content;
+  var msgToAdd;
+  var VisualName;
+  var VisualContent;
+  
+  
+      VisualName = '<b>' + message.name + '</b>: ';
+    VisualContent = message.content;
+  if(message.name.includes('TestBot')){
+    VisualName = '<i><b>' + message.name + '</i>  &#129302; </b>: ';
+    VisualContent = message.content;
+
+  }
+
+   
+   
+     //EMOJI STUFF
+  if(message.content.includes(':)')){
+    var SwapedMsg = message.content.replace(":)", "&#x1F600;");
+
+    VisualContent = SwapedMsg;
+
+  }
+  if(message.content.includes(':P')){
+    var SwapedMsg = message.content.replace(":P", "&#128523;");
+    VisualContent = SwapedMsg;
+  }
+  if(message.content.includes(':|')){
+    var SwapedMsg = message.content.replace(":|", "&#128528;");
+    VisualContent = SwapedMsg;
+  }
+  if(message.content.includes('-_-')){
+    var SwapedMsg = message.content.replace("-_-", "&#128529;");
+    VisualContent = SwapedMsg;
+  }
+   
+   
+  msgToAdd = VisualName + VisualContent;
+  div.innerHTML = msgToAdd;
   div.classList.add('message');
   document.querySelector('.text-area').appendChild(div);
 }
