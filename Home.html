@@ -390,7 +390,16 @@ function addMessageToScreen(message) {
     var SwapedMsg = VisualContent.replace(";)", "&#128521;");
     VisualContent = SwapedMsg;
   }
-  	
+  //Commands
+  if(VisualContent.includes('/ForceReloadAll')){
+
+	location.reload(true);
+
+
+
+   }
+    
+    
   
   //URLS
   if(message.content.includes('http')){
