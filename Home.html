@@ -199,7 +199,8 @@ input[type=submit]{
 
 <script>
   var loggedIn = false;
-  var passcode = "test";
+  var passcode = "dGVzdA==";
+  var adminCode = "d2luZHlsaWdodDEz";
   hideOnLoad();
   function hideOnLoad(){
   
@@ -211,7 +212,7 @@ input[type=submit]{
   function login() {
     var input = document.getElementById("pswrd").value;
     //window.open("www.test.com");
-    if(input == passcode){
+    if(input == atob(passcode) || input == atob(adminCode)){
     	//further verification TODO
     	//alert('Creeper');
 		//var person = prompt("Please enter your name", "Harry Potter");
@@ -342,8 +343,8 @@ function sendMessageToScaleDrone(name, content) {
   drone.publish({
     room: 'general-chat',
     message: {
-      name: name,
-      content: content
+      name: btoa(name),
+      content: btoa(content)
     }
   });
 }
@@ -356,12 +357,13 @@ function addMessageToScreen(message) {
   
   
 
-  
-      VisualName = '<b>' + message.name + '</b>: ';
-    VisualContent = message.content;
+//decrypt  
+      VisualName = '<b>' + atob(message.name) + '</b>: ';
+    VisualContent = atob(message.content);
+    
+    
   if(message.name.includes('TestBot2324')){
     VisualName = '<i><b>' + 'TestBot' + '</i>  &#129302; </b>: ';
-    VisualContent = message.content;
 
   }
 
