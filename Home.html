@@ -352,7 +352,7 @@ function addMessageToScreen(message) {
   var msgToAdd;
   var VisualName;
   var VisualContent;
-  
+
   
       VisualName = '<b>' + message.name + '</b>: ';
     VisualContent = message.content;
@@ -383,7 +383,24 @@ function addMessageToScreen(message) {
     var SwapedMsg = message.content.replace("-_-", "&#128529;");
     VisualContent = SwapedMsg;
   }
-   
+  
+  
+  //URLS
+  if(message.content.includes('http')){
+    var split = message.content.split(" ");
+    var ramMsg = '';
+    for(var i = 0; i < split.length; i++){
+		  if(split[i].includes('http')){
+          	ramMsg += ramMsg + '<a href="'+split[i]+'">'+split[i]+'</a>';
+          }else{
+          	ramMsg += ramMsg + split[i];
+          }
+
+    }
+    
+
+    VisualContent = ramMsg;
+  }   
    
   msgToAdd = VisualName + VisualContent;
   div.innerHTML = msgToAdd;
