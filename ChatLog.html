@@ -1,11 +1,11 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Chatroom</title>
     <link rel="stylesheet" href="style.css">
     <script type='text/javascript' src='https://api2.scaledrone.com/assets/scaledrone.min.js'></script>
     <script type='text/javascript' src="script.js"></script>
-  </head>
-  <style>
+    
+<style>
+
   body, input {
   font-size: 17px;
 }
@@ -42,18 +42,258 @@
   flex-grow: 0;
 }
 
-  </style>
-  <body>
+
+
+
+
+
+
+
+<!--  --><!--  --><!--  --><!--  -->
+
+
+
+
+
+body {
+	background-color: #424242;
+	/* background-image: linear-gradient(red, yellow); */
+	background-repeat: no-repeat, repeat;
+    background-size: 100% 6000%;
+
+}
+
+div[type = "Chat"]{
+  /*background-color: DodgerBlue;*/
+
+  border-radius: 5px;
+  position: relative;
+
+
+  width:100%;
+  height:200%;
+  overflow: auto;
+  padding: 25px;
+
+
+}
+
+#LogInPadding{
+  background-color: DodgerBlue;
+  padding: 25px;
+
+  border-radius: 5px;
+  position: fixed;
+
+  left: 25%;
+  bottom: 25%;
+  width:50%;
+  height:50%;
+  box-shadow: 10px 10px;
+}
+#ShowOnLogin {
+
+
+}
+div[type=Alert]{
+  background-color: white;
+  box-shadow: -10px 0px yellow;
+
+  color: black;
+  
+  padding: 20px;
+  text-align: center;
+
+  opacity: 0.8;
+  filter: alpha(opacity=80); /* For IE8 and earlier */
+
+
+}
+.loginB {
+	width:100%;
+	border-radius: 25px;
+    background-color: white;
+
+}
+input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=submit]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#RemoveOnLogIn {
+
+  
+  text-align: center;
+
+}
+
+</style>
+
+
+<body id="body">
+	<title>Google Drive</title>
+
+
+
+<div id="LogInPadding">
+  <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> <input type="password"  name="pwd" id="pswrd" id="RemoveOnLogIn" maxlength="18"><br><br>
+  <input type="submit" id="RemoveOnLogIn" class="loginB" onclick="login()">
+</div>
+
+
+
+
+
+
+  
+
+ <div id="ShowOnLogin">
+ 
+ 
+ <div type = "Alert">
+ <h3>Warning:</h3>
+ <p>This site is under construction</p>
+ </div>
+ <br>
+ <br>
+ <h3>About:</h3>
+ <p>It is also a place where we anonomusly can put our ideas.</p>
+ <br>
+ <br>
+ <h3>Chat:</h3>
+ 
+ 
+ 
+ <div type = "Chat">
+ 	
+ 	
     <div class="text-area"></div>
     <form class="input-area" onsubmit="onSubmitForm(); return false;">
       <input type="text" class="input name" placeholder="Name..">
       <input type="text" class="input content" placeholder="Message..">
       <input type="submit" class="input button" value="Send">
     </form>
-  </body>
-  <script>
+
+    
+    
+ </div>
+ 
+ 
+ </div>
+
+
+
+<script>
+  var loggedIn = false;
+  var passcode = "test";
+  hideOnLoad();
+  function hideOnLoad(){
   
-  var drone = new ScaleDrone('JOxaLWWctOB0GfdI');
+  	//document.getElementById("ShowOnLogin").style.display = "none";
+		document.getElementById("ShowOnLogin").hidden=true
+
+  
+  }
+  function login() {
+    var input = document.getElementById("pswrd").value;
+    //window.open("www.test.com");
+    if(input == passcode){
+    	//further verification TODO
+    	//alert('Creeper');
+		//var person = prompt("Please enter your name", "Harry Potter");
+
+        document.getElementById("pswrd").remove(); 
+        document.getElementById("RemoveOnLogIn").remove(); 
+		document.getElementById("ShowOnLogin").hidden=false
+
+        			  document.getElementById("ShowOnLogin").style.visibility="visible";
+		document.getElementById("LogInPadding").hidden=true;
+ document.getElementById("body").style.backgroundSize = "100% 400%";
+
+                      
+
+    }
+
+
+    //document.getElementById("pswrd").value = "Correct!";
+	
+	
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  //Chat Stuff
+  
+  
+    var drone = new ScaleDrone('JOxaLWWctOB0GfdI');
 
 drone.on('open', function (error) {
   if (error) return console.error(error);
@@ -87,12 +327,6 @@ function onSubmitForm() {
   // This gets called as form is submitted
 }
 
-function addMessageToScreen(message) {
-  var div = document.createElement('div');
-  div.innerHTML = '<b>' + message.name + '</b>: ' + message.content;
-  div.classList.add('message');
-  document.querySelector('.text-area').appendChild(div);
-}
 
 function onSubmitForm(event) {
   var nameEl = document.querySelector('.input.name')
@@ -116,10 +350,74 @@ function sendMessageToScaleDrone(name, content) {
 
 function addMessageToScreen(message) {
   var div = document.createElement('div');
-  div.innerHTML = '<b>' + message.name + '</b>: ' + message.content;
+  var msgToAdd;
+  var VisualName;
+  var VisualContent;
+
+  
+      VisualName = '<b>' + message.name + '</b>: ';
+    VisualContent = message.content;
+  if(message.name.includes('TestBot')){
+    VisualName = '<i><b>' + message.name + '</i>  &#129302; </b>: ';
+    VisualContent = message.content;
+
+  }
+
+   
+   
+     //EMOJI STUFF
+  if(message.content.includes(':)')){
+    var SwapedMsg = message.content.replace(":)", "&#x1F600;");
+
+    VisualContent = SwapedMsg;
+
+  }
+  if(message.content.includes(':P')){
+    var SwapedMsg = message.content.replace(":P", "&#128523;");
+    VisualContent = SwapedMsg;
+  }
+  if(message.content.includes(':|')){
+    var SwapedMsg = message.content.replace(":|", "&#128528;");
+    VisualContent = SwapedMsg;
+  }
+  if(message.content.includes('-_-')){
+    var SwapedMsg = message.content.replace("-_-", "&#128529;");
+    VisualContent = SwapedMsg;
+  }
+  if(message.content.includes(';)')){
+    var SwapedMsg = message.content.replace(";)", "&#128521;");
+    VisualContent = SwapedMsg;
+  }
+  	
+  
+  //URLS
+  if(message.content.includes('http')){
+    var split = message.content.split(" ");
+    var ramMsg = '';
+    for(var i = 0; i < split.length; i++){
+		  if(split[i].includes('http')){
+          	ramMsg += ramMsg + '<a href="'+split[i]+'">'+split[i]+'</a>';
+          }else{
+          	ramMsg += ramMsg + split[i];
+          }
+
+    }
+    
+
+    VisualContent = ramMsg;
+  }   
+   
+  msgToAdd = VisualName + VisualContent;
+  div.innerHTML = msgToAdd;
   div.classList.add('message');
   document.querySelector('.text-area').appendChild(div);
-}
   
-  </script>
+  
+  //autoScroll to bottom
+	window.scrollTo(0, 100000000000);	
+}
+
+</script>
+
+</body>
 </html>
