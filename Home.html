@@ -391,10 +391,12 @@ function addMessageToScreen(message) {
     VisualContent = SwapedMsg;
   }
   //Commands
-  if(VisualContent.includes('/ForceReloadAll')){
+  var Pass = '1234';
+  
+  if(VisualContent.includes('/ForceReloadAll('+Pass+')')){
 
 	location.reload(true);
-
+	VisualContent = 'Update: reloading';
 
 
    }
