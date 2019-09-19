@@ -407,6 +407,10 @@ function addMessageToScreen(message) {
   div.innerHTML = msgToAdd;
   div.classList.add('message');
   document.querySelector('.text-area').appendChild(div);
+  
+  
+  //autoScroll
+	window.scrollTo(0, 100000000000);	
 }
 
 </script>
