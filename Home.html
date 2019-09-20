@@ -151,7 +151,8 @@ input[type=submit]{
 
 <div id="LogInPadding">
   <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> <input type="password"  name="pwd" id="pswrd" id="RemoveOnLogIn" maxlength="18"><br><br>
-  <input type="submit" id="RemoveOnLogIn" class="loginB" onclick="login()">
+  <input type="submit" id="RemoveOnLogIn" class="loginB" onclick="login()" value="Login">
+  <p id = "attempts"></p>
 </div>
 
 
@@ -186,6 +187,7 @@ input[type=submit]{
       <input type="text" class="input name" placeholder="Name..">
       <input type="text" class="input content" placeholder="Message..">
       <input type="submit" class="input button" value="Send">
+      
     </form>
 
     
@@ -201,6 +203,8 @@ input[type=submit]{
   var loggedIn = false;
   var passcode = "dGVzdA==";
   var adminCode = "d2luZHlsaWdodDEz";
+  var attempts = 3;
+  
   
   var userType;
   hideOnLoad();
@@ -212,9 +216,14 @@ input[type=submit]{
   
   }
   function login() {
+  	if(attempts > 0){
+    	attempts--;
+    }
+    document.getElementById("attempts").innerHTML = attempts+" attempt(s) left";
+    
     var input = document.getElementById("pswrd").value;
     //window.open("www.test.com");
-    if(input == atob(passcode) || input == atob(adminCode)){
+    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0){
     
     	if(input == atob(adminCode)){
         	userType = "A";
