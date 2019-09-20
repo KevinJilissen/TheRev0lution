@@ -383,12 +383,22 @@ function onSubmitForm(event) {
     contentEl.value = '';
   }
 }
-
+var mods = '';
 function sendMessageToScaleDrone(name, content) {
+//add modifigers
+  if(localName == 'TestBot' && userType == "A"){
+    mods = '&#129302;';
+  }
+  if(userType == "A"){
+  	mods = '&#128296';
+  }
+
+
   drone.publish({
     room: 'general-chat',
     message: {
-      name: btoa(name),
+
+      name: btoa(name+mods),
       content: btoa(content)
     }
   });
@@ -416,14 +426,7 @@ function addMessageToScreen(message) {
     VisualContent = atob(message.content);
     
     
-  if(VisualName == '<b>TestBot</b>: ' && userType == "A"){
-  
-    VisualName = '<i><b>' + 'TestBot' + '</i>  &#129302; </b>: ';
 
-  }else if(userType == "A"){
-  	VisualName = '<b>' + atob(message.name) + '&#128296  </b>:';
-    //&#128295
-  }
 
    
    
