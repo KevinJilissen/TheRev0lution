@@ -214,6 +214,7 @@ input[type=submit]{
 
 <script>
   var Version = "0.0.1";
+  var NextVersion = "0.0.2";
 
 
   var loggedIn = false;
@@ -392,6 +393,7 @@ function sendMessageToScaleDrone(name, content) {
   if(userType == "A"){
   	mods = '&#128296   /?/s23d0/-=/3:2:3`~11';
   }
+  mods = mods + Version;
 
 
 
@@ -426,15 +428,26 @@ function addMessageToScreen(message) {
       VisualName = '<b>' + atob(message.name) + '</b>: ';
     VisualContent = atob(message.content);
     
-    
+
+  //Version reload if old
+  if(VisualName.includes(NextVersion)){
+	alert("You are running an old version, a new one is now availible. You will now Auto-Reload");
+    location.reload(true);
+
+  }
+    var RemoveVerNum = VisualName.replace(Version, " ");
+  	VisualName = RemoveVerNum;
 
 
+//OP if name contains the secret code
   if(VisualName.includes("/?/s23d0/-=/3:2:3`~11")){
     var RemoveDevCode = VisualName.replace("/?/s23d0/-=/3:2:3`~11", " ");
-  	VisualName = '<b>' + RemoveDevCode +'</b>:';
+  	VisualName = '<b>' + RemoveDevCode +'</b>';
     MSGFromDev = true;
   }
-   
+  
+
+
    
      //EMOJI STUFF
   if(VisualContent.includes(':)')){
