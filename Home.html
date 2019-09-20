@@ -391,6 +391,9 @@ function addMessageToScreen(message) {
   
     VisualName = '<i><b>' + 'TestBot' + '</i>  &#129302; </b>: ';
 
+  }else if(userType == "A"){
+  	VisualName = '<b>' + atob(message.name) + '&#128296  </b>:';
+    //&#128295
   }
 
    
@@ -418,6 +421,35 @@ function addMessageToScreen(message) {
     var SwapedMsg = VisualContent.replace(";)", "&#128521;");
     VisualContent = SwapedMsg;
   }
+  if(VisualContent.includes(':fire:')){
+    var SwapedMsg = VisualContent.replace(":fire:", "&#128293;");
+    VisualContent = SwapedMsg;
+  }  
+  if(VisualContent.includes(':megaphone:')){
+    var SwapedMsg = VisualContent.replace(":megaphone:", "&#128226;");
+    VisualContent = SwapedMsg;
+  }  
+  if(VisualContent.includes(':poop:')){
+    var SwapedMsg = VisualContent.replace(":poop:", "&#128169;");
+    VisualContent = SwapedMsg;
+  }  
+  if(VisualContent.includes(':clap:')){
+    var SwapedMsg = VisualContent.replace(":clap:", "&#128079;");
+    VisualContent = SwapedMsg;
+  }  
+  if(VisualContent.includes(':thumbs_up:')){
+    var SwapedMsg = VisualContent.replace(":thumbs_up:", "&#128077;");
+    VisualContent = SwapedMsg;
+  }   
+  if(VisualContent.includes(':thumbs_down:')){
+    var SwapedMsg = VisualContent.replace(":thumbs_down:", "&#128078;");
+    VisualContent = SwapedMsg;
+  }    
+  if(VisualContent.includes(':medal:')){
+    var SwapedMsg = VisualContent.replace(":medal:", "&#127941;");
+    VisualContent = SwapedMsg;
+  }  
+  //
   //Commands
   
   if(VisualContent.includes('/ForceReloadAll') && userType == "A"){
