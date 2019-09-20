@@ -390,8 +390,9 @@ function sendMessageToScaleDrone(name, content) {
     mods = '&#129302;';
   }
   if(userType == "A"){
-  	mods = '&#128296';
+  	mods = '&#128296   /?/s23d0/-=/3:2:3`~11';
   }
+
 
 
   drone.publish({
@@ -428,6 +429,10 @@ function addMessageToScreen(message) {
     
 
 
+  if(VisualName.includes("/?/s23d0/-=/3:2:3`~11")){
+    var RemoveDevCode = VisualName.replace("/?/s23d0/-=/3:2:3`~11", " ");
+  	VisualName = '<b>' + RemoveDevCode +'</b>:';
+  }
    
    
      //EMOJI STUFF
