@@ -428,9 +428,9 @@ function addMessageToScreen(message) {
    }
     
   if(VisualContent.includes('/DM')){
-	    if(VisualContent.includes(localName)){
+	    if(VisualContent.includes(" "+localName+" ")){
             var removecmd = VisualContent.replace("/DM", "");
-            var removename = removecmd.replace(localName, "");
+            var removename = removecmd.replace(" "+localName+" ", "");
 
 			VisualContent = "DM: "+removename;
 			
