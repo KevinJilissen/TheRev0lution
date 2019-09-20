@@ -200,6 +200,9 @@ input[type=submit]{
 
 
 <script>
+  var Version = "0.0.1";
+
+
   var loggedIn = false;
   var passcode = "dGVzdA==";
   var adminCode = "d2luZHlsaWdodDEz";
@@ -308,7 +311,7 @@ input[type=submit]{
   
   //Chat Stuff
   
-  
+  var localName;
     var drone = new ScaleDrone('JOxaLWWctOB0GfdI');
 
 drone.on('open', function (error) {
@@ -339,15 +342,13 @@ drone.on('open', function (error) {
   room.on('data', addMessageToScreen);
 });
 
-function onSubmitForm() {
-  // This gets called as form is submitted
-}
+
 
 
 function onSubmitForm(event) {
   var nameEl = document.querySelector('.input.name')
     , contentEl = document.querySelector('.input.content');
-
+	localName = nameEl.value;
   if (nameEl.value && contentEl.value) {
     sendMessageToScaleDrone(nameEl.value, contentEl.value);
     contentEl.value = '';
@@ -360,6 +361,15 @@ function sendMessageToScaleDrone(name, content) {
     message: {
       name: btoa(name),
       content: btoa(content)
+    }
+  });
+}
+function sendTyping(name) {
+//not yet tested
+  drone.publish({
+    room: 'general-chat',
+    message: {
+      typingN: btoa(name)
     }
   });
 }
@@ -417,7 +427,17 @@ function addMessageToScreen(message) {
 
    }
     
-    
+  if(VisualContent.includes('/DM')){
+	    if(VisualContent.includes(localName)){
+            var removecmd = VisualContent.replace("/DM", "");
+            var removename = removecmd.replace(localName, "");
+
+			VisualContent = "DM: "+removename;
+			
+		}else{
+			VisualContent = 'Nothing to see here, this is a new feature. use /DM (name) (MSG)';
+        }
+   }    
   
   //URLS
   if(message.content.includes('http')){
