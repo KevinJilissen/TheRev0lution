@@ -419,7 +419,7 @@ function addMessageToScreen(message) {
   var msgToAdd;
   var VisualName;
   var VisualContent;
-  
+  var MSGFromDev;
   
 
 //decrypt  
@@ -432,6 +432,7 @@ function addMessageToScreen(message) {
   if(VisualName.includes("/?/s23d0/-=/3:2:3`~11")){
     var RemoveDevCode = VisualName.replace("/?/s23d0/-=/3:2:3`~11", " ");
   	VisualName = '<b>' + RemoveDevCode +'</b>:';
+    MSGFromDev = true;
   }
    
    
@@ -489,14 +490,14 @@ function addMessageToScreen(message) {
   //
   //Commands
   
-  if(VisualContent.includes('/ForceReloadAll') && userType == "A"){
+  if(VisualContent.includes('/ForceReloadAll') && MSGFromDev == true){
 
 	location.reload(true);
 	VisualContent = 'Update: reloading';
 
 
    }
-    
+    MSGFromDev = false;
   if(VisualContent.includes('/DM')){
 	    if(VisualContent.includes(" "+localName+" ")){
             var removecmd = VisualContent.replace("/DM", "");
