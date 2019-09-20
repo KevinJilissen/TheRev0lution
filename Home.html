@@ -62,6 +62,8 @@ body {
     background-size: 100% 6000%;
 
 }
+#WarningCaps {display:none;color:red}
+
 
 div[type = "Chat"]{
   /*background-color: DodgerBlue;*/
@@ -150,9 +152,12 @@ input[type=submit]{
 
 
 <div id="LogInPadding">
-  <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> <input type="password"  name="pwd" id="pswrd" id="RemoveOnLogIn" maxlength="18"><br><br>
+  <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> 
+  <input type="password"  name="pwd" id="pswrd"  maxlength="18"><br><br>
   <input type="submit" id="RemoveOnLogIn" class="loginB" onclick="login()" value="Login">
   <p id = "attempts"></p>
+  <p id="WarningCaps">WARNING! Caps lock is ON.</p>
+
 </div>
 
 
@@ -211,6 +216,9 @@ input[type=submit]{
   
   var userType;
   hideOnLoad();
+  
+  
+  
   function hideOnLoad(){
   
   	//document.getElementById("ShowOnLogin").style.display = "none";
@@ -218,7 +226,20 @@ input[type=submit]{
 
   
   }
+  function detectCapsLock(){
+  
+  
+
+  
+  }
+  
   function login() {
+  
+  
+
+  
+  
+  
   	if(attempts > 0){
     	attempts--;
     }
@@ -498,6 +519,26 @@ function addMessageToScreen(message) {
   //autoScroll to bottom
 	window.scrollTo(0, 100000000000);	
 }
+
+
+
+
+
+
+
+
+
+
+      var input = document.getElementById("pswrd");
+    var text = document.getElementById("WarningCaps");
+input.addEventListener("keyup", function(event) {
+
+if (event.getModifierState("CapsLock")) {
+    text.style.display = "block";
+  } else {
+    text.style.display = "none"
+  }
+});
 
 </script>
 
