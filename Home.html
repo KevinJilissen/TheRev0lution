@@ -499,7 +499,16 @@ function addMessageToScreen(message) {
 		}else{
 			VisualContent = 'Nothing to see here, this is a new feature. use /DM (name) (MSG)';
         }
-   }    
+   }   
+   if(VisualContent.includes('/help')){
+   	    VisualName = "[Server]:";
+   		if(userType == "A"){
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /ForceReloadAll";
+
+        }else{
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> ";
+   		}
+   }
   
   //URLS
   if(message.content.includes('http')){
