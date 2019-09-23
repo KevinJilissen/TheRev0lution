@@ -213,8 +213,8 @@ input[type=submit]{
 
 
 <script>
-  var Version = "0.0.1";
-  var NextVersion = "0.0.2";
+  var Version = "0.0.2";
+  var NextVersion = "0.0.3";
 
 
   var loggedIn = false;
@@ -548,10 +548,7 @@ function addMessageToScreen(message) {
         }else{
    			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> ";
    		}
-   }if(VisualContent.includes('/tts')){
-		say(VisualName+' Says '+VisualContent);
-		
-	}
+   }
   
   //URLS
   if(message.content.includes('http')){
@@ -570,6 +567,15 @@ function addMessageToScreen(message) {
     VisualContent = ramMsg;
   }   
    
+   
+   
+   //TTS
+   if(VisualContent.includes('/tts')){
+		say(VisualContent);
+		
+	}
+    
+    
   msgToAdd = VisualName + VisualContent;
   div.innerHTML = msgToAdd;
   div.classList.add('message');
