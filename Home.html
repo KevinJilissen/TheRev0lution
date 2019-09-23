@@ -73,6 +73,7 @@ body {
 #WarningCaps {display:none;color:red}
 
 
+
 div[type = "Chat"]{
   /*background-color: DodgerBlue;*/
 
@@ -123,6 +124,22 @@ div[type=Alert]{
 	width:100%;
 	border-radius: 25px;
     background-color: white;
+  transition: 0.3s;
+
+}
+.loginB:hover {
+
+
+  mix-blend-mode: screen; /* This makes the cutout text possible */
+
+
+  backface-visibility: hidden;
+  border: 1px solid rgba(#fff, 0);
+  content: " ";
+  display: block;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 90%;
 
 }
 input[type=password] {
@@ -162,7 +179,7 @@ input[type=submit]{
 <div id="LogInPadding">
   <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> 
   <input type="password"  name="pwd" id="pswrd"  maxlength="18"><br><br>
-  <input type="submit" id="RemoveOnLogIn" class="loginB" onclick="login()" value="Login">
+  <input type="submit" id="RemoveOnLogIn" class="loginB slide" onclick="login()" value="Login">
   <p id = "attempts"></p>
   <p id="WarningCaps">WARNING! Caps lock is ON.</p>
 
