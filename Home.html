@@ -34,10 +34,7 @@
   padding: 0 15px;
 }
 
-.input.name {
-  width: 90%;
-  
-}
+
 
 .input.content {
   flex-grow: 1;
@@ -45,7 +42,7 @@
 }
 
 .input.button {
-  flex-basis: 120px;
+  flex-basis: 100px;
   flex-grow: 0;
 }
 
@@ -115,10 +112,7 @@ div[type = "Chat"]{
   height:50%;
   box-shadow: 10px 10px;
 }
-#ShowOnLogin {
 
-
-}
 div[type=Alert]{
   background-color: white;
   box-shadow: -10px 0px yellow;
@@ -156,14 +150,39 @@ div[type=Alert]{
 
 }
 input[type=password] {
-  width: 100%;
+  width: 96%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  transition: all 280ms ease-in-out;
+ 
 }
+input[type=password]:hover {
+  width: 100%;
+  transition: all 280ms ease-in-out;
+}
+
+
+input[type=text] {
+  width: 96%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: all 280ms ease-in-out;
+
+}
+input[type=text]:hover {
+  width: 100%;
+  transition: all 280ms ease-in-out;
+}
+
+
 input[type=submit]{
   width: 100%;
   padding: 12px 20px;
@@ -578,6 +597,7 @@ function addMessageToScreen(message) {
   
   //URLS
   if(VisualContent.includes('http')){
+
     var split = VisualContent.split(" ");
     var ramMsg = '';
     for(var i = 0; i < split.length; i++){
@@ -590,6 +610,7 @@ function addMessageToScreen(message) {
     
     VisualContent = ramMsg;
     //VisualContent = 'LINK';
+
   }   
    
    
