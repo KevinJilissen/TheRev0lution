@@ -266,12 +266,7 @@ input[type=submit]{
 
   
   }
-  function detectCapsLock(){
-  
-  
 
-  
-  }
   
   function login() {
   
@@ -367,9 +362,9 @@ function say(m) {
   var voices = window.speechSynthesis.getVoices();
   msg.voice = voices[10];
   msg.voiceURI = "native";
-  msg.volume = 1;
+  msg.volume = 10;
   msg.rate = 1;
-  msg.pitch = 0.8;
+  msg.pitch = 1.8;
   msg.text = m;
   msg.lang = 'en-US';
   speechSynthesis.speak(msg);
