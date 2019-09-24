@@ -568,8 +568,8 @@ function addMessageToScreen(message) {
    }
   
   //URLS
-  if(message.content.includes('http')){
-    var split = message.content.split(" ");
+  if(VisualContent.includes('http')){
+    var split = VisualContent.split(" ");
     var ramMsg = '';
     for(var i = 0; i < split.length; i++){
 		  if(split[i].includes('http')){
@@ -577,11 +577,10 @@ function addMessageToScreen(message) {
           }else{
           	ramMsg += ramMsg + split[i];
           }
-
     }
     
-
     VisualContent = ramMsg;
+    //VisualContent = 'LINK';
   }   
    
    
