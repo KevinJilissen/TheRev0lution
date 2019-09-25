@@ -7,9 +7,7 @@
   <link rel="icon" href="https://kevinjilissen.github.io/TheRev0lution/Google_Drive_logo.png" type="image/png">
   </head>
   
-    <link rel="stylesheet" href="style.css">
     <script type='text/javascript' src='https://api2.scaledrone.com/assets/scaledrone.min.js'></script>
-    <script type='text/javascript' src="script.js"></script>
     
 
 <style>
@@ -60,7 +58,7 @@
 
 
 body {
-	background-color: #424242;
+	background-color: #292929;
 	/* background-image: linear-gradient(red, yellow); */
 	background-repeat: no-repeat, repeat;
     background-size: 100% 6000%;
@@ -200,6 +198,29 @@ input[type=submit]{
 
 }
 
+#extraOnLogin{
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+
+
+
+}
+
+#extraOnLogin:hover{
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+
+
+
+}
+
+
+
+
+
+
 </style>
 
 
@@ -221,8 +242,10 @@ input[type=submit]{
 
 
 
+<img class="Loader" id="extraOnLogin" src="https://kevinjilissen.github.io/TheRev0lution/Anon.png" width="200" height="200" alt="We are Ananimoose...">
 
 
+  
 
   
 
@@ -247,14 +270,12 @@ input[type=submit]{
  	
  	
     <div class="text-area"></div>
-    <form class="input-area" onsubmit="onSubmitForm(); return false;">
-      <input type="text" class="input content" placeholder="Message..">
-      <input type="submit" class="input button" value="Send">
-      
-    </form>
-
-    
-    
+      <form class="input-area" onsubmit="onSubmitForm(); return false;">
+        <input type="text" class="input content" placeholder="Message..">
+        <input type="submit" class="input button" value="Send">
+        
+      </form>
+    </div>
  </div>
  
  
@@ -265,6 +286,8 @@ input[type=submit]{
 <script>
   var Version = "0.0.2";
   var NextVersion = "0.0.3";
+  var loading = true;
+
 
 
   var loggedIn = false;
@@ -275,21 +298,29 @@ input[type=submit]{
   
   var userType;
   hideOnLoad();
+
+
+  var rotDeg = 0;
   
-  
+  //while(rotDeg < 360){
+    document.getElementById("extraOnLogin").style.transform = "rotate("+rotDeg+"deg)";
+    rotDeg+=0.1;
+  //}
+
   
   function hideOnLoad(){
   
   	//document.getElementById("ShowOnLogin").style.display = "none";
-		document.getElementById("ShowOnLogin").hidden=true
-
+		document.getElementById("ShowOnLogin").hidden=true;
+		//document.getElementById("FakeCode").height = 100+'px';
+    //screen.height
   
   }
 
   
   function login() {
   
-  
+
 
   
   
@@ -312,11 +343,14 @@ input[type=submit]{
 
         document.getElementById("pswrd").remove(); 
         document.getElementById("RemoveOnLogIn").remove(); 
-		document.getElementById("ShowOnLogin").hidden=false
+		document.getElementById("ShowOnLogin").hidden=false;
 
-        			  document.getElementById("ShowOnLogin").style.visibility="visible";
-		document.getElementById("LogInPadding").hidden=true;
- document.getElementById("body").style.backgroundSize = "100% 400%";
+    document.getElementById("extraOnLogin").hidden = true; 
+
+
+    document.getElementById("ShowOnLogin").style.visibility="visible";
+    document.getElementById("LogInPadding").hidden=true;
+    document.getElementById("body").style.backgroundSize = "100% 400%";
 
                       
 
@@ -588,7 +622,7 @@ function addMessageToScreen(message) {
    if(VisualContent.includes('/help')){
    	    VisualName = "[Server]:";
    		if(userType == "A"){
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /ForceReloadAll";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll";
 
         }else{
    			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> ";
@@ -630,6 +664,19 @@ function addMessageToScreen(message) {
   
   //autoScroll to bottom
 	window.scrollTo(0, 100000000000);	
+  
+}
+
+
+
+function addToDebugLog(item){
+
+  var div = document.createElement('div');
+
+  div.innerHTML = item;
+  div.classList.add('DebugLog');
+  document.querySelector('.text-area').appendChild(div);
+
 }
 
 
