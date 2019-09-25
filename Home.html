@@ -241,7 +241,7 @@ input[type=submit]{
 
 <div id="LogInPadding">
   <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> 
-    <input type="text" class="input name" placeholder="Name.."><br>
+    <input type="text" class="input name" id = "localName" placeholder="Name.."><br>
   <input type="password"  name="pwd" id="pswrd"  maxlength="18" placeholder="Password.."><br><br>
 
   <input type="submit" id="RemoveOnLogIn" class="loginB slide" onclick="login()" value="Login">
@@ -341,9 +341,11 @@ input[type=submit]{
     document.getElementById("attempts").innerHTML = attempts+" attempt(s) left";
     
     var input = document.getElementById("pswrd").value;
+    var localName = document.getElementById("localName").value;
+
     //window.open("www.test.com");
     if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0){
-    
+    sendMessageToScaleDrone("[Server]", localName + " joined the server");
     	if(input == atob(adminCode)){
         	userType = "A";
         }
