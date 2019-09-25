@@ -12,7 +12,9 @@
 
 <style>
 
-  body, input {
+
+
+body, input {
   font-size: 17px;
 }
 
@@ -99,8 +101,11 @@ div[type = "Chat"]{
 
 #LogInPadding{
   background-color: DodgerBlue;
+  background-image: linear-gradient(DodgerBlue, yellow);
   padding: 25px;
-
+  text-align: center;
+  text-transform: uppercase;
+  /*letter-spacing: 5px;*/
   border-radius: 5px;
   position: fixed;
 
@@ -108,9 +113,14 @@ div[type = "Chat"]{
   bottom: 25%;
   width:50%;
   height:50%;
-  box-shadow: 10px 10px;
+  box-shadow: 10px 10px rgba(53, 53, 53, 10);
 }
 
+
+#ShowOnLogin{
+
+  visibility: hidden;
+}
 div[type=Alert]{
   background-color: white;
   box-shadow: -10px 0px yellow;
@@ -320,7 +330,7 @@ input[type=submit]{
   
   function login() {
   
-
+    
 
   
   
@@ -619,6 +629,14 @@ function addMessageToScreen(message) {
 			VisualContent = 'Nothing to see here, this is a new feature. use /DM (name) (MSG)';
         }
    }   
+
+
+   //TTS
+   if(VisualContent.includes('/tts')){
+		say(VisualContent);
+		
+	}
+
    if(VisualContent.includes('/help')){
    	    VisualName = "[Server]:";
    		if(userType == "A"){
@@ -649,11 +667,7 @@ function addMessageToScreen(message) {
    
    
    
-   //TTS
-   if(VisualContent.includes('/tts')){
-		say(VisualContent);
-		
-	}
+
     
     
   msgToAdd = VisualName + VisualContent;
