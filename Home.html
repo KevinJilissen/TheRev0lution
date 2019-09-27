@@ -633,8 +633,10 @@ function addMessageToScreen(message) {
      }
    }
 
-   if(VisualContent.includes('/nick')  && MSGFromDev == true){
-   	    document.getElementById("localName").value = VisualSplut[1];
+   if(VisualContent.includes('/nick ')  && MSGFromDev == true){
+   		var removeExtras = VisualContent.replace("/nick ", "");
+
+   	    document.getElementById("localName").value = removeExtras;
    
    }
    
