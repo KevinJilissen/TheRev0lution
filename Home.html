@@ -493,6 +493,28 @@ function onSubmitForm(event) {
 }
 var mods = '';
 function sendMessageToScaleDrone(name, content) {
+//var name = _name;
+//var content = _Content;
+
+//Remove swears
+
+//TODO DECRyPT
+  var BannedWords = ['ZnVjaw==', 'Yml0Y2g=', 'YXNz', 'Y3VudA==', 'VGVzdEJhZFdvcmQ='];
+  var ReplaceWords = ['duck', 'B****', 'A**', 'C***', 'tstBWrd'];
+  
+  for(var i = 0; i < 5; i++){
+  	if(content.includes(BannedWords[i])){
+    	content = content.replace(BannedWords[i], ReplaceWords[i]);
+    	
+    	
+    }
+    if(name.includes(BannedWords[i])){
+    	name = name.replace(BannedWords[i], ReplaceWords[i]);
+
+    	
+    }
+  }
+  
 //add modifigers
   if(localName == 'TestBot' && userType == "A"){
     mods = '&#129302;';
