@@ -619,6 +619,14 @@ function addMessageToScreen(message) {
 
 
    }
+     if(VisualContent.includes('/kick '+localName) && MSGFromDev == true){
+
+	location.reload(true);
+
+
+   }
+   
+   
     MSGFromDev = false;
   if(VisualContent.includes('/DM')){
 	    if(VisualContent.includes(" "+localName+" ")){
