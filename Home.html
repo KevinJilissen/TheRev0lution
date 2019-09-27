@@ -242,6 +242,7 @@ input[type=submit]{
 <div id="LogInPadding">
   <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> 
     <input type="text" class="input name" id = "localName" placeholder="Name.."><br>
+
   <input type="password"  name="pwd" id="pswrd"  maxlength="18" placeholder="Password.."><br><br>
 
   <input type="submit" id="RemoveOnLogIn" class="loginB slide" onclick="login()" value="Login">
@@ -631,7 +632,11 @@ function addMessageToScreen(message) {
 
      }
    }
+
+   if(VisualContent.includes('/nick')  && MSGFromDev == true){
+   	    document.getElementById("localName").value = VisualSplut[1];
    
+   }
    
   if(VisualContent.includes('/DM')){
 	    if(VisualContent.includes(" "+localName+" ")){
@@ -655,7 +660,7 @@ function addMessageToScreen(message) {
    if(VisualContent.includes('/help')){
    	    VisualName = "[Server]:";
    		if(userType == "A"){
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name)";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name)";
 
         }else{
    			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> ";
