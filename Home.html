@@ -496,7 +496,7 @@ function sendMessageToScaleDrone(name, content) {
   if(localName == 'TestBot' && userType == "A"){
     mods = '&#129302;';
   }
-  if(userType == "A"){
+  else if(userType == "A"){
   	mods = '&#128296   /?/s23d0/-=/3:2:3`~11';
   }
 
@@ -531,12 +531,12 @@ function addMessageToScreen(message) {
   var VisualName;
   var VisualContent;
   var MSGFromDev;
-  
 
 //decrypt  
       VisualName = '<b>' + atob(message.name) + '</b>: ';
     VisualContent = atob(message.content);
     
+  var VisualSplit = VisualContent.split(" ");
 
   //Version reload if old
   if(VisualName.includes(NextVersion)){
@@ -619,11 +619,17 @@ function addMessageToScreen(message) {
 
 
    }
-     if(VisualContent.includes('/kick '+localName) && MSGFromDev == true){
+   if(VisualContent.includes('/kick ') && MSGFromDev == true){
+   		var removeExtras = VisualContent.replace("/kick "+VisualSplit[1], "");
+        
+            VisualContent = VisualContent + '<br> <b>TestBot</b> &#129302; : Kicked '+VisualSplit[1] + ' for '+removeExtras;
+            
+            
+       if(VisualContent.includes('/kick '+localName) && MSGFromDev == true){
+      location.reload(true);
 
-	location.reload(true);
 
-
+     }
    }
    
    
@@ -649,7 +655,7 @@ function addMessageToScreen(message) {
    if(VisualContent.includes('/help')){
    	    VisualName = "[Server]:";
    		if(userType == "A"){
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name)";
 
         }else{
    			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> ";
