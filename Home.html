@@ -503,13 +503,13 @@ function sendMessageToScaleDrone(name, content) {
   var ReplaceWords = ['duck', 'B****', 'A**', 'C***', 'tstBWrd'];
   
   for(var i = 0; i < 5; i++){
-  	if(content.includes(BannedWords[i])){
-    	content = content.replace(BannedWords[i], ReplaceWords[i]);
+  	if(content.toLowerCase().includes(atob(BannedWords[i]))){
+    	content = content.toLowerCase().replace(atob(BannedWords[i]), ReplaceWords[i]);
     	
     	
     }
-    if(name.includes(BannedWords[i])){
-    	name = name.replace(BannedWords[i], ReplaceWords[i]);
+    if(name.toLowerCase().includes(atob(BannedWords[i]))){
+    	name = name.toLowerCase().replace(atob(BannedWords[i]), ReplaceWords[i]);
 
     	
     }
