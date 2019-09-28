@@ -528,6 +528,7 @@ function sendMessageToScaleDrone(name, content) {
 
 
 
+try {
   drone.publish({
     room: 'general-chat',
     message: {
@@ -536,6 +537,17 @@ function sendMessageToScaleDrone(name, content) {
       content: btoa(content)
     }
   });
+} catch (error) {
+  drone.publish({
+    room: 'general-chat',
+    message: {
+
+      name: (name+mods),
+      content: (content)
+    }
+  });
+}
+
   mods = '';
 }
 function sendTyping(name) {
@@ -556,8 +568,15 @@ function addMessageToScreen(message) {
   var MSGFromDev;
 
 //decrypt  
-      VisualName = '<b>' + atob(message.name) + '</b>: ';
-    VisualContent = atob(message.content);
+try {
+  VisualName = '<b>' + atob(message.name) + '</b>: ';
+  VisualContent = atob(message.content);
+} catch (error) {
+  VisualName = '<b>' + (message.name) + '</b>: ';
+  VisualContent = (message.content);
+}
+
+
     
   var VisualSplit = VisualContent.split(" ");
 
