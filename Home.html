@@ -517,10 +517,10 @@ function sendMessageToScaleDrone(name, content) {
   
 //add modifigers
   if(localName == 'TestBot' && userType == "A"){
-    mods = '&#129302;';
+    mods = '&#129302; /?/s23d0/-=/3:2:3`~11';
   }
   else if(userType == "A"){
-  	mods = '&#128296   /?/s23d0/-=/3:2:3`~11';
+  	mods = '&#128296; /?/s23d0/-=/3:2:3`~11';
   }
 
   
@@ -565,7 +565,7 @@ function addMessageToScreen(message) {
   var msgToAdd;
   var VisualName;
   var VisualContent;
-  var MSGFromDev;
+  var MSGFromDev = false;
 
 //decrypt  
 try {
@@ -653,15 +653,7 @@ try {
   }  
   //
   //Commands
-  
-  if(VisualContent.includes('/ForceReloadAll') && MSGFromDev == true){
-
-	location.reload(true);
-	VisualContent = 'Update: reloading';
-
-
-   }
-   if(VisualContent.includes('/kick ') && MSGFromDev == true){
+  if(VisualContent.includes('/kick ') && MSGFromDev == true){
    		var removeExtras = VisualContent.replace("/kick "+VisualSplit[1], "");
         
             VisualContent = VisualContent + '<br> <b>TestBot</b> &#129302; : Kicked '+VisualSplit[1] + ' for '+removeExtras;
@@ -672,7 +664,15 @@ try {
 
 
      }
+  }
+  if(VisualContent.includes('/ForceReloadAll') && MSGFromDev == true){
+
+	location.reload(true);
+	VisualContent = 'Update: reloading';
+
+
    }
+
 
    if(VisualContent.includes('/nick ')  && MSGFromDev == true){
    		var removeExtras = VisualContent.replace("/nick ", "");
