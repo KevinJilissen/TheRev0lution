@@ -527,26 +527,32 @@ function sendMessageToScaleDrone(name, content) {
   mods = mods + Version;
 
 
+if(!content.includes("/nick")){
+  try {
+    drone.publish({
+      room: 'general-chat',
+      message: {
 
-try {
-  drone.publish({
-    room: 'general-chat',
-    message: {
+        name: btoa(name+mods),
+        content: btoa(content)
+      }
+    });
+  } catch (error) {
+    drone.publish({
+      room: 'general-chat',
+      message: {
 
-      name: btoa(name+mods),
-      content: btoa(content)
-    }
-  });
-} catch (error) {
-  drone.publish({
-    room: 'general-chat',
-    message: {
+        name: (name+mods),
+        content: (content)
+      }
+    });
+  }
+}else{
+   		var removeExtras = content.replace("/nick ", "");
 
-      name: (name+mods),
-      content: (content)
-    }
-  });
-}
+   	    document.getElementById("localName").value = removeExtras;
+        VisualContent = "";
+  }
 
   mods = '';
 }
