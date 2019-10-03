@@ -269,7 +269,7 @@ input[type=submit]{
  
  <div type = "Alert">
  <h3>Warning:</h3>
- <p>This site is under construction</p>
+ <p id="warn">This site is under construction</p>
  </div>
  <br>
  <br>
@@ -313,7 +313,19 @@ input[type=submit]{
   
   var userType;
   hideOnLoad();
+  offline();
+  function offline(){
+	  var id = setInterval(doThing, 5);
+	  function doThing(){
+      	if(navigator.onLine == false){
+        //its offine
+      		document.getElementById("warn").innerHTML ="Wifi is offline";
+        }
+      }
+      //addMessageToScreen(navigator.onLine);
 
+
+  }
 
   var rotDeg = 0;
   
@@ -482,7 +494,6 @@ drone.on('open', function (error) {
 
   room.on('data', addMessageToScreen);
 });
-
 
 
 
