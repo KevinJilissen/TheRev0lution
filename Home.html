@@ -17,7 +17,10 @@
 body, input {
   font-size: 17px;
 }
-
+.time{
+	position: absolute;
+	right:0px;
+}
 .message {
   margin: 5px 0;
 }
@@ -525,7 +528,12 @@ function sendMessageToScaleDrone(name, content) {
 
   
   mods = mods + Version;
+  
 
+
+var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var add = "<small class='time'>"+time+"</small>";
 
 if(!content.includes("/nick")){
   try {
@@ -534,7 +542,7 @@ if(!content.includes("/nick")){
       message: {
 
         name: btoa(name+mods),
-        content: btoa(content)
+        content: btoa(content + add)
       }
     });
   } catch (error) {
@@ -543,7 +551,7 @@ if(!content.includes("/nick")){
       message: {
 
         name: (name+mods),
-        content: (content)
+        content: (content + add)
       }
     });
   }
