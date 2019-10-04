@@ -249,7 +249,7 @@ input[type=submit]{
 
   <input type="password"  name="pwd" id="pswrd"  maxlength="18" placeholder="Password.."><br><br>
 
-  <input type="submit" id="RemoveOnLogIn" class="loginB slide" onclick="login()" value="Login">
+  <input type="submit" id="LoginB" class="loginB slide" onclick="login()" value="Login">
   <p id = "attempts"></p>
   <p id="WarningCaps">WARNING! Caps lock is ON.</p>
 
@@ -287,7 +287,7 @@ input[type=submit]{
     <div class="text-area"></div>
       <form class="input-area" onsubmit="onSubmitForm(); return false;">
         <input type="text" class="input content" id = "msg" placeholder="Message..">
-        <input type="submit" class="input button" value="Send">
+        <input type="submit" class="input button" id="SendMSG" value="Send">
         <button class="Speech" onclick="Srec.start()"></button>
         
       </form>
@@ -320,6 +320,9 @@ input[type=submit]{
   var userType;
   hideOnLoad();
   offline();
+  
+
+  
   function offline(){
 	  var id = setInterval(doThing, 5);
 	  function doThing(){
@@ -405,7 +408,22 @@ input[type=submit]{
   
   
   
-  
+    var pswrd = document.getElementById("pswrd");
+pswrd.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("LoginB").click();
+  }
+});
+
+
+  var pswrd = document.getElementById("SendMSG");
+pswrd.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("msg").click();
+  }
+});
   
   
   
