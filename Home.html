@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    	<title>My Drive</title>
+    	<title>My Drive - Google Drive</title>
         
-  <link rel="icon" href="https://kevinjilissen.github.io/TheRev0lution/Google_Drive_logo.png" type="image/png">
+  <link id = "SiteIcon" rel="icon" href="https://kevinjilissen.github.io/TheRev0lution/Google_Drive_logo.png" type="image/png">
   </head>
   
     <script type='text/javascript' src='https://api2.scaledrone.com/assets/scaledrone.min.js'></script>
@@ -249,7 +249,7 @@ input[type=submit]{
 
   <input type="password"  name="pwd" id="pswrd"  maxlength="18" placeholder="Password.."><br><br>
 
-  <input type="submit" id="RemoveOnLogIn" class="loginB slide" onclick="login()" value="Login">
+  <input type="submit" id="LoginB" class="loginB slide" onclick="login()" value="Login">
   <p id = "attempts"></p>
   <p id="WarningCaps">WARNING! Caps lock is ON.</p>
 
@@ -273,6 +273,11 @@ input[type=submit]{
  </div>
  <br>
  <br>
+ <h2>Settings:</h2>
+ <button onclick="document.getElementById('SiteIcon').href = 'https://kevinjilissen.github.io/TheRev0lution/Google_Drive_logo.png'; document.title='My Drive - Google Drive' ">Goole Drive</button>
+ <button onclick="document.getElementById('SiteIcon').href = 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico'; document.title='Google Docs' ">Goole Docs</button>
+
+ <!--Google_Doc_Logo.jpg-->
  <h3>About:</h3>
  <p>It is also a place where we anonomusly can put our ideas.</p>
  <br>
@@ -286,8 +291,9 @@ input[type=submit]{
  	
     <div class="text-area"></div>
       <form class="input-area" onsubmit="onSubmitForm(); return false;">
-        <input type="text" class="input content" placeholder="Message..">
-        <input type="submit" class="input button" value="Send">
+        <input type="text" class="input content" id = "msg" placeholder="Message..">
+        <input type="submit" class="input button" id="SendMSG" value="Send">
+        <button class="Speech" onclick="Srec.start()"></button>
         
       </form>
     </div>
@@ -304,6 +310,10 @@ input[type=submit]{
   var loading = true;
 
 
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+  const Srec = new SpeechRecognition();
+
+  const InstaLogIn = true;
 
   var loggedIn = false;
   var passcode = /*"dGVzdA=="*/"YmFuYW5h";
@@ -314,6 +324,22 @@ input[type=submit]{
   var userType;
   hideOnLoad();
   offline();
+  
+  //href
+ 
+
+
+
+
+
+
+
+
+  function selectText() {
+    const input = document.getElementById('pswrd');
+    input.focus();
+    input.select();
+  }
   function offline(){
 	  var id = setInterval(doThing, 5);
 	  function doThing(){
@@ -361,9 +387,9 @@ input[type=submit]{
     var localName = document.getElementById("localName").value;
 
     //window.open("www.test.com");
-    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0){
+    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || InstaLogIn){
     sendMessageToScaleDrone("[Server]", localName + " joined the server");
-    	if(input == atob(adminCode)){
+    	if(input == atob(adminCode) || InstaLogIn){
         	userType = "A";
         }
     	//further verification TODO
@@ -399,12 +425,39 @@ input[type=submit]{
   
   
   
+    var pswrd = document.getElementById("pswrd");
+pswrd.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("LoginB").click();
+   
+       const input = document.getElementById('msg');
+    input.focus();
+    input.select();
+  }
+});
+
+
+  var pswrd = document.getElementById("SendMSG");
+pswrd.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("msg").click();
+  }
+});
+//selectText()
   
   
   
   
-  
-  
+    var pswrd = document.getElementById("localName");
+pswrd.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   //event.preventDefault();
+   //document.getElementById("msg").click();
+   selectText();
+  }
+});
   
   
   
@@ -585,6 +638,21 @@ function sendTyping(name) {
     }
   });
 }
+
+Srec.onstart = function(){
+    console.log('You may speak');
+
+}
+Srec.onresult = function(event){
+    const current = event.resultIndex;
+    const transcript = event.results[current][0].transcript;
+    console.log(transcript);
+    var element = document.getElementById("msg");
+
+    element.value = transcript;
+
+}
+
 
 function addMessageToScreen(message) {
   var div = document.createElement('div');
