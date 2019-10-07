@@ -322,7 +322,11 @@ input[type=submit]{
   offline();
   
 
-  
+  function selectText() {
+    const input = document.getElementById('pswrd');
+    input.focus();
+    input.select();
+  }
   function offline(){
 	  var id = setInterval(doThing, 5);
 	  function doThing(){
@@ -424,11 +428,19 @@ pswrd.addEventListener("keyup", function(event) {
    document.getElementById("msg").click();
   }
 });
+//selectText()
   
   
   
   
-  
+    var pswrd = document.getElementById("localName");
+pswrd.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   //event.preventDefault();
+   //document.getElementById("msg").click();
+   selectText();
+  }
+});
   
   
   
