@@ -2,14 +2,14 @@
 <html>
 
 <head>
-    	<title>My Drive</title>
+    	<title>My Drive - Google Drive</title>
         
   <link id = "SiteIcon" rel="icon" href="https://kevinjilissen.github.io/TheRev0lution/Google_Drive_logo.png" type="image/png">
   </head>
   
     <script type='text/javascript' src='https://api2.scaledrone.com/assets/scaledrone.min.js'></script>
     
-
+    <script src="https://kit.fontawesome.com/63f8f44888.js" crossorigin="anonymous"></script>
 <style>
 
 
@@ -73,14 +73,14 @@ body {
 #WarningCaps {display:none;color:red}
 
 div[class = "message"]{
-	color:white;
+	/*color:white;*/
     transition: all 280ms ease-in-out;
 
     
     
 }
 div[class = "message"]:hover{
-	color:red;
+	/*color:red;*/
     transition: all 280ms ease-in-out;
 
     
@@ -230,7 +230,13 @@ input[type=submit]{
 
 }
 
+.LinkToBeta{
+    background-color: white;
 
+
+
+
+}
 
 
 
@@ -266,6 +272,11 @@ input[type=submit]{
 
  <div id="ShowOnLogin">
  
+ <div class = "LinkToBeta">
+ 	<i class="fas fa-bug"></i>
+    <a href="https://kevinjilissen.github.io/TheRev0lution/Beta.Html">Want to test out the beta? Click Here.</a>
+
+ </div>
  
  <div type = "Alert">
  <h3>Warning:</h3>
@@ -273,6 +284,11 @@ input[type=submit]{
  </div>
  <br>
  <br>
+ <h2>Settings:</h2>
+ <button onclick="document.getElementById('SiteIcon').href = 'https://kevinjilissen.github.io/TheRev0lution/Google_Drive_logo.png'; document.title='My Drive - Google Drive' ">Google Drive</button>
+ <button onclick="document.getElementById('SiteIcon').href = 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico'; document.title='Google Docs' ">Google Docs</button>
+
+ <!--Google_Doc_Logo.jpg-->
  <h3>About:</h3>
  <p>It is also a place where we anonomusly can put our ideas.</p>
  <br>
@@ -287,8 +303,8 @@ input[type=submit]{
     <div class="text-area"></div>
       <form class="input-area" onsubmit="onSubmitForm(); return false;">
         <input type="text" class="input content" id = "msg" placeholder="Message..">
-        <input type="submit" class="input button" id="SendMSG" value="Send">
-        <button class="Speech" onclick="Srec.start()"></button>
+        <button type="submit" class="input button"s id="SendMSG" value="Send">Send <i class="fas fa-share"></i></button>
+        <button class="Speech" onclick="Srec.start()"><i class="fas fa-microphone"></i></button>
         
       </form>
     </div>
@@ -300,15 +316,13 @@ input[type=submit]{
 
 
 <script>
-  var Version = "0.0.2";
-  var NextVersion = "0.0.3";
+  var Version = "0.0.3";
+  var NextVersion = "0.0.4";
   var loading = true;
-
 
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
   const Srec = new SpeechRecognition();
-
 
 
   var loggedIn = false;
@@ -316,16 +330,27 @@ input[type=submit]{
   var adminCode = "d2luZHlsaWdodDEz";
   var attempts = 3;
   
+  //var colors = {"red","white","blue","green","green"};
+  //var LocalColorID = Math.floor(Math.random()*4);
+  //var LocalColor = colors[LocalColorID];
+  var LocalCol = '#' + Math.floor(Math.random()*16777215).toString(16);
   
   var userType;
   hideOnLoad();
   offline();
   
+
+  var InstaLogIn;
+
+  var PageUrl = location.href; 
+  //alert(PageUrl.search("5500"));
+  if(PageUrl.search("5500") != -1){
+    //InstaLogIn.thing = true;
+    InstaLogIn = true;
+
+  }
   //href
-  document.getElementById("SiteIcon").href = "https://lh3.googleusercontent.com/a-/AAuE7mBMCfMugteWtdyDDIeBv-oRfQFNwynVnRGFEYIa=s75-c";
-
-
-
+  const DevLogin = InstaLogIn;
 
 
 
@@ -342,6 +367,7 @@ input[type=submit]{
       	if(navigator.onLine == false){
         //its offine
       		document.getElementById("warn").innerHTML ="Wifi is offline";
+          document.reload();
         }
       }
       //addMessageToScreen(navigator.onLine);
@@ -383,9 +409,9 @@ input[type=submit]{
     var localName = document.getElementById("localName").value;
 
     //window.open("www.test.com");
-    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0){
+    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || DevLogin){
     sendMessageToScaleDrone("[Server]", localName + " joined the server");
-    	if(input == atob(adminCode)){
+    	if(input == atob(adminCode) || DevLogin){
         	userType = "A";
         }
     	//further verification TODO
@@ -578,15 +604,20 @@ function sendMessageToScaleDrone(name, content) {
     	
     }
   }
-  
+  var beforeMods = "";
 //add modifigers
   if(localName == 'TestBot' && userType == "A"){
     mods = '&#129302; /?/s23d0/-=/3:2:3`~11';
   }
   else if(userType == "A"){
-  	mods = '&#128296; /?/s23d0/-=/3:2:3`~11';
-  }
+  	//mods = '&#128296; /?/s23d0/-=/3:2:3`~11';
+    mods = "/?/s23d0/-=/3:2:3`~11";
+    beforeMods = "<i class='fas fa-code'></i> <i class='fas fa-user-shield'></i> ";
+  }else{
+    beforeMods = LocalCol + "; <i class='fas fa-user-circle'></i> ";
 
+  }
+  //beforeMods = "<i class='fad fa-user-crown'></i> ";
   
   mods = mods + Version;
   
@@ -602,7 +633,7 @@ if(!content.includes("/nick")){
       room: 'general-chat',
       message: {
 
-        name: btoa(name+mods),
+        name: btoa(beforeMods+name+mods),
         content: btoa(content + add)
       }
     });
@@ -611,7 +642,7 @@ if(!content.includes("/nick")){
       room: 'general-chat',
       message: {
 
-        name: (name+mods),
+        name: (beforeMods+name+mods),
         content: (content + add)
       }
     });
@@ -688,7 +719,6 @@ try {
   }
   
 
-
    
      //EMOJI STUFF
   if(VisualContent.includes(':)')){
@@ -741,7 +771,7 @@ try {
     var SwapedMsg = VisualContent.replace(":medal:", "&#127941;");
     VisualContent = SwapedMsg;
   }  
-  //
+  
   //Commands
   if(VisualContent.includes('/kick ') && MSGFromDev == true){
    		var removeExtras = VisualContent.replace("/kick "+VisualSplit[1], "");
@@ -821,12 +851,18 @@ try {
    
    
    
+  var colorSplitter = VisualName.split(";");
+  
 
+  
+  //colorSplitter[0];  
     
-    
-  msgToAdd = VisualName + VisualContent;
+  //msgToAdd = VisualName + VisualContent;
+  msgToAdd = colorSplitter[1] + VisualContent;
   div.innerHTML = msgToAdd;
   div.classList.add('message');
+  //Error wont set color
+  div.style.backgroundColor = colorSplitter[0];
   document.querySelector('.text-area').appendChild(div);
   
   
