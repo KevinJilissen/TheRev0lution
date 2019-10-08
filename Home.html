@@ -9,7 +9,7 @@
   
     <script type='text/javascript' src='https://api2.scaledrone.com/assets/scaledrone.min.js'></script>
     
-
+    <script src="https://kit.fontawesome.com/63f8f44888.js" crossorigin="anonymous"></script>
 <style>
 
 
@@ -274,8 +274,8 @@ input[type=submit]{
  <br>
  <br>
  <h2>Settings:</h2>
- <button onclick="document.getElementById('SiteIcon').href = 'https://kevinjilissen.github.io/TheRev0lution/Google_Drive_logo.png'; document.title='My Drive - Google Drive' ">Goole Drive</button>
- <button onclick="document.getElementById('SiteIcon').href = 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico'; document.title='Google Docs' ">Goole Docs</button>
+ <button onclick="document.getElementById('SiteIcon').href = 'https://kevinjilissen.github.io/TheRev0lution/Google_Drive_logo.png'; document.title='My Drive - Google Drive' ">Google Drive</button>
+ <button onclick="document.getElementById('SiteIcon').href = 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico'; document.title='Google Docs' ">Google Docs</button>
 
  <!--Google_Doc_Logo.jpg-->
  <h3>About:</h3>
@@ -292,8 +292,8 @@ input[type=submit]{
     <div class="text-area"></div>
       <form class="input-area" onsubmit="onSubmitForm(); return false;">
         <input type="text" class="input content" id = "msg" placeholder="Message..">
-        <input type="submit" class="input button" id="SendMSG" value="Send">
-        <button class="Speech" onclick="Srec.start()"></button>
+        <button type="submit" class="input button"s id="SendMSG" value="Send">Send <i class="fas fa-share"></i></button>
+        <button class="Speech" onclick="Srec.start()"><i class="fas fa-microphone"></i></button>
         
       </form>
     </div>
@@ -305,15 +305,14 @@ input[type=submit]{
 
 
 <script>
-  var Version = "0.0.2";
-  var NextVersion = "0.0.3";
+  var Version = "0.0.3";
+  var NextVersion = "0.0.4";
   var loading = true;
 
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
   const Srec = new SpeechRecognition();
 
-  const InstaLogIn = false;
 
   var loggedIn = false;
   var passcode = /*"dGVzdA=="*/"YmFuYW5h";
@@ -325,11 +324,18 @@ input[type=submit]{
   hideOnLoad();
   offline();
   
+
+  var InstaLogIn;
+
+  var PageUrl = location.href; 
+  //alert(PageUrl.search("5500"));
+  if(PageUrl.search("5500") != -1){
+    //InstaLogIn.thing = true;
+    InstaLogIn = true;
+
+  }
   //href
- 
-
-
-
+  const DevLogin = InstaLogIn;
 
 
 
@@ -346,6 +352,7 @@ input[type=submit]{
       	if(navigator.onLine == false){
         //its offine
       		document.getElementById("warn").innerHTML ="Wifi is offline";
+          document.reload();
         }
       }
       //addMessageToScreen(navigator.onLine);
@@ -387,9 +394,9 @@ input[type=submit]{
     var localName = document.getElementById("localName").value;
 
     //window.open("www.test.com");
-    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || InstaLogIn){
+    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || DevLogin){
     sendMessageToScaleDrone("[Server]", localName + " joined the server");
-    	if(input == atob(adminCode) || InstaLogIn){
+    	if(input == atob(adminCode) || DevLogin){
         	userType = "A";
         }
     	//further verification TODO
@@ -582,15 +589,20 @@ function sendMessageToScaleDrone(name, content) {
     	
     }
   }
-  
+  var beforeMods = "";
 //add modifigers
   if(localName == 'TestBot' && userType == "A"){
     mods = '&#129302; /?/s23d0/-=/3:2:3`~11';
   }
   else if(userType == "A"){
-  	mods = '&#128296; /?/s23d0/-=/3:2:3`~11';
-  }
+  	//mods = '&#128296; /?/s23d0/-=/3:2:3`~11';
+    mods = "/?/s23d0/-=/3:2:3`~11";
+    beforeMods = "<i class='fas fa-code'></i> <i class='fas fa-user-shield'></i> ";
+  }else{
+    beforeMods = "<i class='fas fa-user-circle'></i> ";
 
+  }
+  //beforeMods = "<i class='fad fa-user-crown'></i> ";
   
   mods = mods + Version;
   
@@ -606,7 +618,7 @@ if(!content.includes("/nick")){
       room: 'general-chat',
       message: {
 
-        name: btoa(name+mods),
+        name: btoa(beforeMods+name+mods),
         content: btoa(content + add)
       }
     });
@@ -615,7 +627,7 @@ if(!content.includes("/nick")){
       room: 'general-chat',
       message: {
 
-        name: (name+mods),
+        name: (beforeMods+name+mods),
         content: (content + add)
       }
     });
@@ -692,7 +704,6 @@ try {
   }
   
 
-
    
      //EMOJI STUFF
   if(VisualContent.includes(':)')){
@@ -745,7 +756,7 @@ try {
     var SwapedMsg = VisualContent.replace(":medal:", "&#127941;");
     VisualContent = SwapedMsg;
   }  
-  //
+  
   //Commands
   if(VisualContent.includes('/kick ') && MSGFromDev == true){
    		var removeExtras = VisualContent.replace("/kick "+VisualSplit[1], "");
