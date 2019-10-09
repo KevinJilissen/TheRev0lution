@@ -690,7 +690,6 @@ Srec.onresult = function(event){
 
 
 function addMessageToScreen(message) {
-  console.log(atob(message.name));
   var div = document.createElement('div');
   var msgToAdd;
   var VisualName;
@@ -700,10 +699,26 @@ function addMessageToScreen(message) {
   
 
   
-  //notify
+
+
+
+
+//decrypt  
+try {
+  VisualName = '<b>' + atob(message.name) + '</b>: ';
+  VisualContent = atob(message.content);
+} catch (error) {
+  VisualName = '<b>' + (message.name) + '</b>: ';
+  VisualContent = (message.content);
+}
+
+
+      //notify
   var siteIcon = document.getElementById('SiteIcon').href; 
   if(siteIcon.includes("Google_Drive_logo.png")){
-  	document.title = 'Recent - Google Drive';
+  	if(!VisualName.includes(localName)){//localName
+  		document.title = 'Recent - Google Drive';
+    }
   }
   
   
@@ -719,19 +734,7 @@ pswrd.addEventListener("keyup", function(event) {
   	}
   }
 });
-
-
-
-//decrypt  
-try {
-  VisualName = '<b>' + atob(message.name) + '</b>: ';
-  VisualContent = atob(message.content);
-} catch (error) {
-  VisualName = '<b>' + (message.name) + '</b>: ';
-  VisualContent = (message.content);
-}
-
-
+    
     
   var VisualSplit = VisualContent.split(" ");
 
