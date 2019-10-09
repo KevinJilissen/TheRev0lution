@@ -698,13 +698,13 @@ function addMessageToScreen(message) {
   var MSGFromDev = false;
   
   
-  
+  var DocTitle = document.title;
+
   
   //notify
-  var siteIcon document.getElementById('SiteIcon').href;  document.title='My Drive - Google Drive';
+  var siteIcon = document.getElementById('SiteIcon').href; 
   if(siteIcon.includes("Google_Drive_logo.png")){
-  	
-  	document.title='Recent - Google Drive';
+  	DocTitle = 'Recent - Google Drive';
   }
 
 //decrypt  
