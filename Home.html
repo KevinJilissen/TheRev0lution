@@ -73,14 +73,14 @@ body {
 #WarningCaps {display:none;color:red}
 
 div[class = "message"]{
-	color:white;
+	/*color:white;*/
     transition: all 280ms ease-in-out;
 
     
     
 }
 div[class = "message"]:hover{
-	color:red;
+	/*color:red;*/
     transition: all 280ms ease-in-out;
 
     
@@ -230,7 +230,13 @@ input[type=submit]{
 
 }
 
+.LinkToBeta{
+    background-color: white;
 
+
+
+
+}
 
 
 
@@ -266,6 +272,11 @@ input[type=submit]{
 
  <div id="ShowOnLogin">
  
+ <div class = "LinkToBeta">
+ 	<i class="fas fa-bug"></i>
+    <a href="https://kevinjilissen.github.io/TheRev0lution/Beta.Html">Want to test out the beta? Click Here.</a>
+
+ </div>
  
  <div type = "Alert">
  <h3>Warning:</h3>
@@ -276,6 +287,8 @@ input[type=submit]{
  <h2>Settings:</h2>
  <button onclick="document.getElementById('SiteIcon').href = 'https://kevinjilissen.github.io/TheRev0lution/Google_Drive_logo.png'; document.title='My Drive - Google Drive' ">Google Drive</button>
  <button onclick="document.getElementById('SiteIcon').href = 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico'; document.title='Google Docs' ">Google Docs</button>
+<br>
+<p>Select your users color</p> <input type="color" id="userCol" value="#ff0000"><br><br>
 
  <!--Google_Doc_Logo.jpg-->
  <h3>About:</h3>
@@ -319,7 +332,11 @@ input[type=submit]{
   var adminCode = "d2luZHlsaWdodDEz";
   var attempts = 3;
   
-  
+  //var colors = {"red","white","blue","green","green"};
+  //var LocalColorID = Math.floor(Math.random()*4);
+  //var LocalColor = colors[LocalColorID];
+  var LocalCol = '#' + Math.floor(Math.random()*16777215).toString(16);
+  document.getElementById("userCol").value = LocalCol;
   var userType;
   hideOnLoad();
   offline();
@@ -571,9 +588,13 @@ function sendMessageToScaleDrone(name, content) {
 //var name = _name;
 //var content = _Content;
 
+
+//change local color
+LocalCol = document.getElementById("userCol").value;
+
 //Remove swears
 
-//TODO DECRyPT
+
   var BannedWords = ['ZnVjaw==', 'Yml0Y2g=', 'YXNz', 'Y3VudA==', 'c2hpdA=='];
   var ReplaceWords = ['duck', 'B****', 'A**', 'C***', ':poop:'];
   
@@ -593,13 +614,14 @@ function sendMessageToScaleDrone(name, content) {
 //add modifigers
   if(localName == 'TestBot' && userType == "A"){
     mods = '&#129302; /?/s23d0/-=/3:2:3`~11';
+    beforeMods = LocalCol + ";";
   }
   else if(userType == "A"){
   	//mods = '&#128296; /?/s23d0/-=/3:2:3`~11';
     mods = "/?/s23d0/-=/3:2:3`~11";
-    beforeMods = "<i class='fas fa-code'></i> <i class='fas fa-user-shield'></i> ";
+    beforeMods = LocalCol + "; <i class='fas fa-code'></i> <i class='fas fa-user-shield'></i> ";
   }else{
-    beforeMods = "<i class='fas fa-user-circle'></i> ";
+    beforeMods = LocalCol + "; <i class='fas fa-user-circle'></i> ";
 
   }
   //beforeMods = "<i class='fad fa-user-crown'></i> ";
@@ -612,6 +634,7 @@ var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var add = "<small class='time'>"+time+"</small>";
 
+console.log("Sending: "+beforeMods+name+mods+"  "+content + add)
 if(!content.includes("/nick")){
   try {
     drone.publish({
@@ -667,6 +690,7 @@ Srec.onresult = function(event){
 
 
 function addMessageToScreen(message) {
+  console.log(atob(message.name));
   var div = document.createElement('div');
   var msgToAdd;
   var VisualName;
@@ -758,6 +782,21 @@ try {
   }  
   
   //Commands
+  /*if(VisualName.includes(localName) && VisualContent.includes("/NameColor")){
+    var removeExtras = VisualContent.replace("/NameColor ", "");
+    var FinalCol;
+    if(VisualContent.includes("red")){
+      FinalCol = "red";
+    }
+
+    
+
+    console.log(colorThing);
+    //LocalCol = removeExtras.substring(1, 4);
+    LocalCol = FinalCol;
+  }*/
+
+
   if(VisualContent.includes('/kick ') && MSGFromDev == true){
    		var removeExtras = VisualContent.replace("/kick "+VisualSplit[1], "");
         
@@ -809,7 +848,7 @@ try {
    if(VisualContent.includes('/help')){
    	    VisualName = "[Server]:";
    		if(userType == "A"){
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name)";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> ";
 
         }else{
    			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> ";
@@ -835,13 +874,23 @@ try {
   }   
    
    
-   
+  var colorSplitter = "";
+   colorSplitter = VisualName.split(";");
+  
+  //remove <b>
+  var col = colorSplitter[0].replace("<b>", "");
+  //remove seccond <b>
+ col = col.replace("<b>", "");
 
-    
-    
-  msgToAdd = VisualName + VisualContent;
+  
+  //colorSplitter[0];  
+  console.log(col);
+  //msgToAdd = VisualName + VisualContent;
+  msgToAdd = colorSplitter[1] + VisualContent;
   div.innerHTML = msgToAdd;
   div.classList.add('message');
+  //Error wont set color
+  div.style.backgroundColor = col;
   document.querySelector('.text-area').appendChild(div);
   
   
