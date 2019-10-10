@@ -856,6 +856,13 @@ pswrd.addEventListener("keyup", function(event) {
    }
    
   if(VisualContent.includes('/DM')){
+  		if(VisualName.includes(localName){
+            var removecmd = VisualContent.replace("/DM", "");
+            var removename = removecmd.replace(" "+localName+" ", "");
+
+			VisualContent = "DM: "+removename;        
+        
+        }
 	    if(VisualContent.includes(" "+localName+" ")){
             var removecmd = VisualContent.replace("/DM", "");
             var removename = removecmd.replace(" "+localName+" ", "");
