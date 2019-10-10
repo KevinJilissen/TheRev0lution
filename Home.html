@@ -870,6 +870,8 @@ pswrd.addEventListener("keyup", function(event) {
 
    //TTS
    if(VisualContent.includes('/tts')){
+  		VisualContent = VisualContent.replace("/tts ", "");
+
 		say(VisualContent);
 		
 	}
