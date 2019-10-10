@@ -897,7 +897,11 @@ pswrd.addEventListener("keyup", function(event) {
           }
     }
     
-    VisualContent = ramMsg;
+  var removeTimeHtml = ramMsg.replace("<small", "");
+
+    
+    
+    VisualContent = removeTimeHtml;
     //VisualContent = 'LINK';
 
   }   
