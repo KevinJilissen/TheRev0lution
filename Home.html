@@ -706,6 +706,31 @@ try {
   VisualContent = (message.content);
 }
 
+      //notify
+  var siteIcon = document.getElementById('SiteIcon').href; 
+  if(siteIcon.includes("Google_Drive_logo.png")){
+  	if(VisualName.includes(localName)){//localName
+  		document.title = 'Recent - Google Drive';
+    }
+  }
+  
+  
+  
+  //Making as read
+    var pswrd = document.getElementById("SendMSG");
+pswrd.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("msg").click();
+    if(siteIcon.includes("Google_Drive_logo.png")){
+  		document.title = 'My Drive - Google Drive';
+  	}
+  }
+});
+  	if(VisualName.includes(localName)){//localName
+  		document.title = 'My Drive - Google Drive';
+    }
+
 
     
   var VisualSplit = VisualContent.split(" ");
