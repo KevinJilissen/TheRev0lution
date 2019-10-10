@@ -258,6 +258,8 @@ input[type=submit]{
   <input type="submit" id="LoginB" class="loginB slide" onclick="login()" value="Login">
   <p id = "attempts"></p>
   <p id="WarningCaps">WARNING! Caps lock is ON.</p>
+  
+  <p id="version"></p>
 
 </div>
 
@@ -322,6 +324,7 @@ input[type=submit]{
   var NextVersion = "0.0.4";
   var loading = true;
 
+  document.getElementById('version').innerHTML = "V "+Version;
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
   const Srec = new SpeechRecognition();
@@ -690,18 +693,12 @@ Srec.onresult = function(event){
 
 
 function addMessageToScreen(message) {
+  console.log(atob(message.name));
   var div = document.createElement('div');
   var msgToAdd;
   var VisualName;
   var VisualContent;
   var MSGFromDev = false;
-  
-  
-
-  
-
-
-
 
 //decrypt  
 try {
@@ -712,13 +709,11 @@ try {
   VisualContent = (message.content);
 }
 
-
       //notify
   var siteIcon = document.getElementById('SiteIcon').href; 
   if(siteIcon.includes("Google_Drive_logo.png")){
-  	if(!VisualName.includes(localName)){//localName
-  		document.title = 'Recent - Google Drive';
-    }
+  	document.title = 'Recent - Google Drive';
+    
   }
   
   
@@ -734,7 +729,13 @@ pswrd.addEventListener("keyup", function(event) {
   	}
   }
 });
-    
+  	if(VisualName.includes(localName)){//localName
+    	if(siteIcon.includes("Google_Drive_logo.png")){
+  			document.title = 'My Drive - Google Drive';
+        }
+    }
+
+
     
   var VisualSplit = VisualContent.split(" ");
 
@@ -869,6 +870,8 @@ pswrd.addEventListener("keyup", function(event) {
 
    //TTS
    if(VisualContent.includes('/tts')){
+  		VisualContent = VisualContent.replace("/tts ", "");
+
 		say(VisualContent);
 		
 	}
@@ -888,7 +891,7 @@ pswrd.addEventListener("keyup", function(event) {
 
     var split = VisualContent.split(" ");
     var ramMsg = '';
-    for(var i = 0; i < split.length; i++){
+    for(var i = 0; i < split.length/2; i++){
 		  if(split[i].includes('http')){
           	ramMsg += ramMsg + '<a href="'+split[i]+'">'+split[i]+'</a>';
           }else{
@@ -896,7 +899,11 @@ pswrd.addEventListener("keyup", function(event) {
           }
     }
     
-    VisualContent = ramMsg;
+  var removeTimeHtml = ramMsg.replace("<small", "");
+
+    
+    
+    VisualContent = removeTimeHtml;
     //VisualContent = 'LINK';
 
   }   
@@ -918,7 +925,7 @@ pswrd.addEventListener("keyup", function(event) {
   div.innerHTML = msgToAdd;
   div.classList.add('message');
   //Error wont set color
-  div.style.backgroundColor = col;
+  div.style.color = col;
   document.querySelector('.text-area').appendChild(div);
   
   
