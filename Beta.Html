@@ -854,11 +854,13 @@ pswrd.addEventListener("keyup", function(event) {
         VisualContent = "";
    
    }
+   var uppercaseMSG = VisualContent.toUpperCase();
+
    
-  if(VisualContent.includes('/DM')){
+  if(uppercaseMSG.includes('/DM')){
 	    if(VisualContent.includes(" "+localName+" ")){
-            var removecmd = VisualContent.replace("/DM", "");
-            var removename = removecmd.replace(" "+localName+" ", "");
+            var removecmd = VisualContent.replace("/DM".ignoreCase, "");
+            var removename = removecmd.replace(" "+localName, "");
 
 			VisualContent = "DM: "+removename;
 			
