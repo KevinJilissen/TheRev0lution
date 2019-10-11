@@ -879,12 +879,20 @@ pswrd.addEventListener("keyup", function(event) {
    if(VisualContent.includes('/help')){
    	    VisualName = "[Server]:";
    		if(userType == "A"){
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> ";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /getOnlineMembers <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> ";
 
         }else{
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> ";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> /getOnlineMembers ";
    		}
    }
+   //alert(VisualContent);
+   var removeTimeStamp = VisualContent.split("<");
+      if(removeTimeStamp[0].localeCompare("/getOnlineMembers") == 0){
+		  var nameEl = document.querySelector('.input.name')
+
+		sendMessageToScaleDrone(nameEl.value, 'I am online');
+        
+	  }
   
   //URLS
   if(VisualContent.includes('http')){
