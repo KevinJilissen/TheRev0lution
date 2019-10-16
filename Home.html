@@ -809,6 +809,17 @@ pswrd.addEventListener("keyup", function(event) {
     var SwapedMsg = VisualContent.replace(":medal:", "&#127941;");
     VisualContent = SwapedMsg;
   }  
+  if(VisualContent.includes('<3')){
+    var SwapedMsg = VisualContent.replace("<3", "<i class='fas fa-heart fa-2x'></i>");
+    VisualContent = SwapedMsg;
+  }  
+  if(VisualContent.includes(':bomb:')){
+    var SwapedMsg = VisualContent.replace(":bomb:", "<i class='fas fa-bomb fa-spin'></i>");
+    VisualContent = SwapedMsg;
+  }  
+    
+  
+  //<i class="fas fa-bomb"></i>
   
   //Commands
   /*if(VisualName.includes(localName) && VisualContent.includes("/NameColor")){
