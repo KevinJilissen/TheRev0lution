@@ -817,9 +817,21 @@ pswrd.addEventListener("keyup", function(event) {
     var SwapedMsg = VisualContent.replace(":bomb:", "<i class='fas fa-bomb fa-spin'></i>");
     VisualContent = SwapedMsg;
   }  
+  if(VisualContent.includes(':chrome:')){
+    var SwapedMsg = VisualContent.replace(":chrome:", "<i class='fab fa-chrome fa-spin'></i>");
+    VisualContent = SwapedMsg;
+  }    
+  if(VisualContent.includes(':discord:')){
+    var SwapedMsg = VisualContent.replace(":discord:", "<i class='fab fa-discord' style='color: #FFFFFF;'></i>");
+    VisualContent = SwapedMsg;
+  }   
+  if(VisualContent.includes(':microsoft:')){
+    var SwapedMsg = VisualContent.replace(":microsoft:", "<i class='fab fa-microsoft'></i>");
+    VisualContent = SwapedMsg;
+  }  
     
   
-  //<i class="fas fa-bomb"></i>
+  //<i class="fab fa-microsoft"></i>
   
   //Commands
   /*if(VisualName.includes(localName) && VisualContent.includes("/NameColor")){
