@@ -765,6 +765,14 @@ pswrd.addEventListener("keyup", function(event) {
     VisualContent = SwapedMsg;
 
   }
+  if(VisualContent.includes(':think:')){
+    var SwapedMsg = VisualContent.replace(":think:", "&#x1F914;");
+
+    VisualContent = SwapedMsg;
+
+  }
+  
+  //
   if(VisualContent.includes(':P')){
     var SwapedMsg = VisualContent.replace(":P", "&#128523;");
     VisualContent = SwapedMsg;
