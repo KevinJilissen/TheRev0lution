@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EEEEEEEEEEEEEEEE</title>
+</head>
+<body>
+
+<h1 id="encrypted">sss</h1>
+<p>Input field: <input type="text" id="encrypt" value="M"></p>
+
+<button onclick="Encrypt()" id="encryptbtn">encrypt</button>
+
+</body>
+
+<script>
+	function Encrypt(){ 
+    	var x = document.getElementById("encrypt").innerText;
+    	document.getElementById("encrypted").innerHTML = encrypt();  
+   }
+
+	function encrypt(input, key) {
+      var output = "";
+      for(var i = 0; i < input.length; i++){
+      	output += input.charAt(i);
+      	
+      }
+      return output;
+    } 
+
+
+
+
+
+</script>
+
+</html>
