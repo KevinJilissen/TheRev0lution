@@ -7,21 +7,33 @@
 
 <h1 id="encrypted"></h1>
 <p>Input field: <input type="text" id="encrypt" value=""></p>
+<p>Code: <input type="text" id="code" value="abcdefghijklmnopqrstuvwxyz"></p>
 <p>Output field: <input type="text" id="output" value=""></p>
 
 <button onclick="Encrypt()" id="encryptbtn">encrypt</button>
+<button onclick="Decrypt()" id="decryptbtn">decrypt</button>
+
 
 </body>
 
 <script>
 	function Encrypt(){ 
     	var x = document.getElementById("encrypt").value;
-    	document.getElementById("output").value = encrypt(x,"abcdefghijklmnopqrstuvwxyz");  
+        var code = document.getElementById("code").value;
+    	document.getElementById("output").value = encrypt(x,code);  
+   }
+   	function Decrypt(){ 
+    	var x = document.getElementById("output").value;
+        var code = document.getElementById("code").value;
+    	document.getElementById("encrypt").value = decrypt(x,code);  
    }
 
 	function encrypt(input, key) {
       var output = "";
+      
+      
       for(var i = 0; i < input.length; i++){
+      
         var index = key.indexOf(input.charAt(i));
         
       	//output += input.charAt(i);
@@ -30,7 +42,23 @@
       return output;
     } 
 
+	function decrypt(input, key) {
+      var output = "";
+      var nums = input.split(" ");
 
+      
+      
+      for(var i = 0; i < nums.length-1; i++){
+      
+        //var index = input.charAt(i);
+        
+      	//output += input.charAt(i);
+        
+      	output += key.charAt(nums[i]);
+        
+      }
+      return output;
+    } 
 
 
 
