@@ -16,14 +16,16 @@
 <script>
 	function Encrypt(){ 
     	var x = document.getElementById("encrypt").value;
-    	document.getElementById("output").value = encrypt(x,"");  
+    	document.getElementById("output").value = encrypt(x,"abcdefghijklmnopqrstuvwxyz");  
    }
 
 	function encrypt(input, key) {
       var output = "";
       for(var i = 0; i < input.length; i++){
-      	output += input.charAt(i);
-      	
+        var index = key.indexOf(input.charAt(i));
+        
+      	//output += input.charAt(i);
+      	output += index + " ";
       }
       return output;
     } 
