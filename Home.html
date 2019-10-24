@@ -912,15 +912,15 @@ pswrd.addEventListener("keyup", function(event) {
    if(VisualContent.includes('/help')){
    	    VisualName = "[Server]:";
    		if(userType == "A"){
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /getOnlineMembers <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> ";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /ServerList <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> ";
 
         }else{
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> /getOnlineMembers ";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> /ServerList ";
    		}
    }
    //alert(VisualContent);
    var removeTimeStamp = VisualContent.split("<");
-      if(removeTimeStamp[0].localeCompare("/getOnlineMembers") == 0){
+      if(removeTimeStamp[0].localeCompare("/ServerList") == 0){
 		  var nameEl = document.querySelector('.input.name')
 
 		sendMessageToScaleDrone(nameEl.value, 'I am online');
