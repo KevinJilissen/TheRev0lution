@@ -33,8 +33,12 @@
       
       
       for(var i = 0; i < input.length; i++){
-      
+        var seed = Math.round(Math.random());
         var index = key.indexOf(input.charAt(i));
+        
+        if(seed == 1){
+        	index = key.lastIndexOf(input.charAt(i));
+        }
         
       	//output += input.charAt(i);
       	output += index + " ";
@@ -47,14 +51,14 @@
       var nums = input.split(" ");
 
       
-      
       for(var i = 0; i < nums.length-1; i++){
+
       
         //var index = input.charAt(i);
         
       	//output += input.charAt(i);
-        
       	output += key.charAt(nums[i]);
+        
         
       }
       return output;
