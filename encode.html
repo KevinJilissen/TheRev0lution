@@ -5,8 +5,9 @@
 </head>
 <body>
 
-<h1 id="encrypted">sss</h1>
-<p>Input field: <input type="text" id="encrypt" value="M"></p>
+<h1 id="encrypted"></h1>
+<p>Input field: <input type="text" id="encrypt" value=""></p>
+<p>Output field: <input type="text" id="output" value=""></p>
 
 <button onclick="Encrypt()" id="encryptbtn">encrypt</button>
 
@@ -14,8 +15,8 @@
 
 <script>
 	function Encrypt(){ 
-    	var x = document.getElementById("encrypt").innerText;
-    	document.getElementById("encrypted").innerHTML = encrypt();  
+    	var x = document.getElementById("encrypt").value;
+    	document.getElementById("output").value = encrypt(x,"");  
    }
 
 	function encrypt(input, key) {
