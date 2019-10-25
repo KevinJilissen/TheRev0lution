@@ -238,7 +238,12 @@ input[type=submit]{
 
 }
 
+.EncrHide{
+  position: absolute;
+  top: -500px;
+  visibility: hidden;
 
+}
 
 
 </style>
@@ -250,6 +255,20 @@ input[type=submit]{
 
 
 <div id="LogInPadding">
+
+    <p class="EncrHide">Input field: <input type="text" id="encrypt" value="" /></p>
+    <p class="EncrHide">
+      Code:
+      <input
+        type="text"
+        id="code"
+        value="Please Enable JavaScript"
+      />
+    </p>
+    <p class="EncrHide">Output field: <input type="text" id="output" value="" /></p>
+
+
+
   <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> 
     <input type="text" class="input name" id = "localName" placeholder="Name.."><br>
 
@@ -510,7 +529,83 @@ pswrd.addEventListener("keyup", function(event) {
   
   
   
-  
+     function getSubstringCount(input, lookingFor) {
+      var amt = 0;
+      for (let i = 0; i < input.length; i++) {
+        const Char = input.charAt(i);
+        if (Char == lookingFor) {
+          amt++;
+        }
+      }
+      return amt;
+    }
+    function getSubstringID(input, Char, num) {
+      var Return = 0;
+      var count = 0;
+      for (let i = 0; i < input.length; i++) {
+        if (input.charAt(i) == Char) {
+          console.log(input.charAt(i) + "  " + Char);
+          if (count - 1 < num) {
+            Return = i;
+            count++;
+          }
+        }
+      }
+      return Return;
+    }
+    function getRandomCharID(input, Char) {
+      return getSubstringID(
+        input,
+        Char,
+        Math.round(Math.random() * getSubstringCount(input, Char))
+      );
+    }
+    function encrypt(input, key) {
+      var output = "";
+      for (var i = 0; i < input.length; i++) {
+        //var seed = Math.round(Math.random());
+        var index = key.indexOf(input.charAt(i));
+        var index = getRandomCharID(key, input.charAt(i));
+        //if (seed == 1) {
+        //index = key.lastIndexOf(input.charAt(i));
+        //}
+        //output += input.charAt(i);
+        output += index + " ";
+      }
+      return output;
+    }
+    function decrypt(input, key) {
+      var output = "";
+      var nums = input.split(" ");
+      for (var i = 0; i < nums.length - 1; i++) {
+        //var index = input.charAt(i);
+        //output += input.charAt(i);
+        output += key.charAt(nums[i]);
+      }
+      return output;
+    }
+    
+    
+    
+    
+    
+    
+        document.getElementById("code").value =
+      "J'kh*dS%&9sz6tcasTs&\\nz1|a(cTD5ww<A&7}yz/%Qvq?f!*>*HhSdqWl\"G4o_4B\\n55c:Il13`w+y4kxQuXv6~rR<$w{z!zcAzjSnbF  >H0+1nmJO'8vVd.imk~5+0C#e|k:Jw+TcrK09~cHk~M.%8*)3xb9#_>7~~8vr`UB:urd^rx$<R4i`ff)uCbAtkNrj05b{Gz{xBz<%>r(zW69<cx0et\\$2~mgnzm:)Q*ckg6OsCKDxxYL}D*|7#$4Eq$v~7r@|\\g<y8+^f(xzKRr0#^0(qw^pu@7nfi8(uiK*,,08j1Y<f`f^dzo\\L66*x01ANM`qy8o`gj0^Xb5sj+cd%3mn.\"7+(e:20pGebaDx_48$}g{%i,#A5_jQ6\"2z@g /:jEefc6oW<vYc7pcn(s:,3hn'3.ph$R)%hP8c@U%0e}>hMla@.Lct0!a#,XOn88|umTVxzp1N20YT`1&t|gel(@B{j{w~/10msp4U!yH2}le|+wxfE>Dv{3:&&Xc<<__^Hel$g!s8asE?P`dv0Pctvq9h_cdlh3kF>Ly M}035z}Z}$2dCXgcRh,>ul9xho8+{&_bzE)uS2`pfq|@V7&i20,PX7`,ej+8k.>mtVuy,Sr^0G9{4xb8 .@tb63.:09mUZ9l)}j8x4No$ZQP5{?'Bq9z1!Ni#~sa):,^|v(i3!_!U.L>Fo&z,.82q^?:)8?p?o&#z}Z%tcC%J?)?8II#FkK7AwYxuO.?6W4WpaxyFO@xyV!_I(G@y#xwBo|ZI'maqd/2c*t\")l5a*?1JxbiMz!8pgio";
+    function Encrypt(txt) {
+      var x = document.getElementById("msg").value;
+      var code = document.getElementById("code").value;
+      //document.getElementById("output").value = encrypt(x, code);
+      //document.getElementById("output").value = encrypt(x, code);
+      return encrypt(txt, code);
+      //
+    }
+    function Decrypt(txt) {
+      var x = document.getElementById("output").value;
+      var code = document.getElementById("code").value;
+      //document.getElementById("encrypt").value = decrypt(x, code);
+      return decrypt(txt, code);
+    }
   
   
   
@@ -592,6 +687,7 @@ function sendMessageToScaleDrone(name, content) {
 //var content = _Content;
 
 
+
 //change local color
 LocalCol = document.getElementById("userCol").value;
 
@@ -644,8 +740,8 @@ if(!content.includes("/nick")){
       room: 'general-chat',
       message: {
 
-        name: btoa(beforeMods+name+mods),
-        content: btoa(content + add)
+        name: btoa(Encrypt(beforeMods+name+mods)),
+        content: btoa(Encrypt(content + add))
       }
     });
   } catch (error) {
@@ -653,8 +749,8 @@ if(!content.includes("/nick")){
       room: 'general-chat',
       message: {
 
-        name: (beforeMods+name+mods),
-        content: (content + add)
+        name: (Encrypt(beforeMods+name+mods)),
+        content: (Encrypt(content + add))
       }
     });
   }
@@ -693,7 +789,7 @@ Srec.onresult = function(event){
 
 
 function addMessageToScreen(message) {
-  console.log(atob(message.name));
+  console.log(atob(Decrypt(message.name)));
   var div = document.createElement('div');
   var msgToAdd;
   var VisualName;
@@ -702,8 +798,8 @@ function addMessageToScreen(message) {
 
 //decrypt  
 try {
-  VisualName = '<b>' + atob(message.name) + '</b>: ';
-  VisualContent = atob(message.content);
+  VisualName = '<b>' + atob(Decrypt(message.name)) + '</b>: ';
+  VisualContent = atob(Decrypt(message.content));
 } catch (error) {
   VisualName = '<b>' + (message.name) + '</b>: ';
   VisualContent = (message.content);
@@ -765,6 +861,14 @@ pswrd.addEventListener("keyup", function(event) {
     VisualContent = SwapedMsg;
 
   }
+  if(VisualContent.includes(':think:')){
+    var SwapedMsg = VisualContent.replace(":think:", "&#x1F914;");
+
+    VisualContent = SwapedMsg;
+
+  }
+  
+  //
   if(VisualContent.includes(':P')){
     var SwapedMsg = VisualContent.replace(":P", "&#128523;");
     VisualContent = SwapedMsg;
@@ -809,6 +913,29 @@ pswrd.addEventListener("keyup", function(event) {
     var SwapedMsg = VisualContent.replace(":medal:", "&#127941;");
     VisualContent = SwapedMsg;
   }  
+  if(VisualContent.includes('<3')){
+    var SwapedMsg = VisualContent.replace("<3", "<i class='fas fa-heart fa-2x'></i>");
+    VisualContent = SwapedMsg;
+  }  
+  if(VisualContent.includes(':bomb:')){
+    var SwapedMsg = VisualContent.replace(":bomb:", "<i class='fas fa-bomb fa-spin'></i>");
+    VisualContent = SwapedMsg;
+  }  
+  if(VisualContent.includes(':chrome:')){
+    var SwapedMsg = VisualContent.replace(":chrome:", "<i class='fab fa-chrome fa-spin'></i>");
+    VisualContent = SwapedMsg;
+  }    
+  if(VisualContent.includes(':discord:')){
+    var SwapedMsg = VisualContent.replace(":discord:", "<i class='fab fa-discord' style='color: #FFFFFF;'></i>");
+    VisualContent = SwapedMsg;
+  }   
+  if(VisualContent.includes(':microsoft:')){
+    var SwapedMsg = VisualContent.replace(":microsoft:", "<i class='fab fa-microsoft'></i>");
+    VisualContent = SwapedMsg;
+  }  
+    
+  
+  //<i class="fab fa-microsoft"></i>
   
   //Commands
   /*if(VisualName.includes(localName) && VisualContent.includes("/NameColor")){
@@ -881,15 +1008,15 @@ pswrd.addEventListener("keyup", function(event) {
    if(VisualContent.includes('/help')){
    	    VisualName = "[Server]:";
    		if(userType == "A"){
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /getOnlineMembers <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> ";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /ServerList <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> ";
 
         }else{
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> /getOnlineMembers ";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> /ServerList ";
    		}
    }
    //alert(VisualContent);
    var removeTimeStamp = VisualContent.split("<");
-      if(removeTimeStamp[0].localeCompare("/getOnlineMembers") == 0){
+      if(removeTimeStamp[0].localeCompare("/ServerList") == 0){
 		  var nameEl = document.querySelector('.input.name')
 
 		sendMessageToScaleDrone(nameEl.value, 'I am online');
