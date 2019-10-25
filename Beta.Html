@@ -591,7 +591,7 @@ pswrd.addEventListener("keyup", function(event) {
     
     
         document.getElementById("code").value =
-      "J'kh*dS%&9sz6tcasTs&\\nz1|a(cTD5ww<A&7}yz/%Qvq?f!*>*HhSdqWl\"G4o_4B\\n55c:Il13`w+y4kxQuXv6~rR<$w{z!zcAzjSnbF  >H0+1nmJO'8vVd.imk~5+0C#e|k:Jw+TcrK09~cHk~M.%8*)3xb9#_>7~~8vr`UB:urd^rx$<R4i`ff)uCbAtkNrj05b{Gz{xBz<%>r(zW69<cx0et\\$2~mgnzm:)Q*ckg6OsCKDxxYL}D*|7#$4Eq$v~7r@|\\g<y8+^f(xzKRr0#^0(qw^pu@7nfi8(uiK*,,08j1Y<f`f^dzo\\L66*x01ANM`qy8o`gj0^Xb5sj+cd%3mn.\"7+(e:20pGebaDx_48$}g{%i,#A5_jQ6\"2z@g /:jEefc6oW<vYc7pcn(s:,3hn'3.ph$R)%hP8c@U%0e}>hMla@.Lct0!a#,XOn88|umTVxzp1N20YT`1&t|gel(@B{j{w~/10msp4U!yH2}le|+wxfE>Dv{3:&&Xc<<__^Hel$g!s8asE?P`dv0Pctvq9h_cdlh3kF>Ly M}035z}Z}$2dCXgcRh,>ul9xho8+{&_bzE)uS2`pfq|@V7&i20,PX7`,ej+8k.>mtVuy,Sr^0G9{4xb8 .@tb63.:09mUZ9l)}j8x4No$ZQP5{?'Bq9z1!Ni#~sa):,^|v(i3!_!U.L>Fo&z,.82q^?:)8?p?o&#z}Z%tcC%J?)?8II#FkK7AwYxuO.?6W4WpaxyFO@xyV!_I(G@y#xwBo|ZI'maqd/2c*t\")l5a*?1JxbiMz!8pgio";
+      "J'kh*dS%&9sz6tcasTs&\\nz1|a(cTD5ww<A&7}yz/%Qvq?f!*>*HhSdqWl\"G4o_4B\\n55c:Il13`w+y4kxQuXv6~rR<$w{z!zcAzjSnbF  >H0+1nmJO'8vVd.imk~5+0C#e|k:Jw+TcrK09~cHk~M.%8*)3xb9#_>7~~8vr`UB:urd^rx$<R4i`ff)uCbAtkNr[j05b{Gz{xBz<%>r(zW69<cx0et\\$2~mgnzm:)Q*ckg6OsCKDxx]YL}D*|7#$4Eq$v~7r@|\\g<y8+^f(xzKRr0#^0(qw^pu@7nfi8(uiK*,,08j1Y<f`f^dzo\\L66*x01ANM`qy8o`gj0^Xb5sj+cd%3mn.\"7+(e:20pGebaDx_48$}g{%i,#A5_jQ6\"2z@g /:jEefc6oW<vYc7pcn(s:,3hn'3.ph$R)%hP8c@U%0e}>hMla@.Lct0!a#,XOn88|umTVxzp1N20YT`1&t|gel(@B{j{w~/10msp4U!yH2}le|+[wxfE>]Dv{3:&&Xc<<__^Hel$g!s8asE?P`dv0Pctvq9h_cdlh3kF>Ly M}035z}Z}$2dCXgcRh,>ul9xho8+{&_bzE)uS2`pfq|@V7&i20,PX7`,ej+8k.>mtVuy,Sr^0G9{4xb8 .@tb63.:09mUZ9l)}j8x4No$ZQP5{?'Bq9z1!Ni#~sa):,^|v(i3!_!U.L>Fo&z,.82q^?:)8?p?o&#z}Z%tcC%J?)?8II#FkK7AwYxuO.?6W4WpaxyFO@xyV!_I(G@y#xwBo|ZI'maqd/2c*t\")l5a*?1JxbiMz!8pgio&#129302; /?/s23d0/-=/3:2:3`~11";
     function Encrypt(txt) {
       var x = document.getElementById("msg").value;
       var code = document.getElementById("code").value;
@@ -798,8 +798,8 @@ function addMessageToScreen(message) {
 
 //decrypt  
 try {
-  VisualName = '<b>' + atob(Decrypt(message.name)) + '</b>: ';
-  VisualContent = atob(Decrypt(message.content));
+  VisualName = '<b>' + Decrypt(atob(message.name)) + '</b>: ';
+  VisualContent = Decrypt(atob(message.content));
 } catch (error) {
   VisualName = '<b>' + (message.name) + '</b>: ';
   VisualContent = (message.content);
