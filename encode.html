@@ -1,71 +1,102 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>EEEEEEEEEEEEEEEE</title>
-</head>
-<body>
+  <head>
+    <title>EEEEEEEEEEEEEEEE</title>
+  </head>
+  <body>
+    <h1 id="encrypted"></h1>
+    <p>Input field: <input type="text" id="encrypt" value="" /></p>
+    <p>
+      Code:
+      <input
+        type="text"
+        id="code"
+        value="Please Enable JavaScript"
+      />
+    </p>
+    <p>Output field: <input type="text" id="output" value="" /></p>
 
-<h1 id="encrypted"></h1>
-<p>Input field: <input type="text" id="encrypt" value=""></p>
-<p>Code: <input type="text" id="code" value="abcdefghijklmnopqrstuvwxyz"></p>
-<p>Output field: <input type="text" id="output" value=""></p>
+    <button onclick="Encrypt()" id="encryptbtn">encrypt</button>
+    <button onclick="Decrypt()" id="decryptbtn">decrypt</button>
+  </body>
 
-<button onclick="Encrypt()" id="encryptbtn">encrypt</button>
-<button onclick="Decrypt()" id="decryptbtn">decrypt</button>
-
-
-</body>
-
-<script>
-	function Encrypt(){ 
-    	var x = document.getElementById("encrypt").value;
-        var code = document.getElementById("code").value;
-    	document.getElementById("output").value = encrypt(x,code);  
-   }
-   	function Decrypt(){ 
-    	var x = document.getElementById("output").value;
-        var code = document.getElementById("code").value;
-    	document.getElementById("encrypt").value = decrypt(x,code);  
-   }
-
-	function encrypt(input, key) {
-      var output = "";
-      
-      
-      for(var i = 0; i < input.length; i++){
-        var seed = Math.round(Math.random());
-        var index = key.indexOf(input.charAt(i));
-        
-        if(seed == 1){
-        	index = key.lastIndexOf(input.charAt(i));
+  <script>
+    document.getElementById("code").value =
+      ".qmxn,67)&(c089152uw3ebrvty`<>\\alsk*,^$4{fhgziop%|#@!zxc.08dj?_+:7~)&(c0}2uvtyaskw3ebrg68915dj?_+lhc08qmxn}:zio|p%`#@!z~x*^$4{f<>\\zhcw.&0:,m~(bf5t4^*}$w9b`%}?c|lzju+8uli+05|2x&#a7tp1.(hq{>!a^ev7gxcy>kni@z*:8{!k6ep?n13)<8jq)8$do9vf6_c@d,r4mo~zxy#02r<sg%_`x30sxlfi^|c<mx}mnsz`2+%ee_`?:p#7$z>ouaq,*6g(1~o08.w*5gl67n}cbrkk$#zsh<:!w4@f0t^a9qj%c~!p)d9ydt3,8h?0)x88{z+0c3x&i(.1b@|jv25vru&y_{>4?%43v&s++*{$g#2j4t:bbqi$^c1!p:f^t|vr?0s<}0#k.7dw918e<az0w9`x0%n6`xhho!>gdyzioak~86{n3@c&~7l*yxzmc@fj5(luxzu),ec.m}_2rq_,p)8>|(58<4}0~d?0q|4%c_8l&kg_.,w?c9u!~<!n)i0)(:*si0`j+c98x+8521>bppwhf.uzl6s#*#ngftx3o7ozxy@(z2bc{:%rxehat8{}`ve3z1m$a657y&vk^j|q>,r^md$@";
+    function Encrypt() {
+      var x = document.getElementById("encrypt").value;
+      var code = document.getElementById("code").value;
+      //document.getElementById("output").value = encrypt(x, code);
+      document.getElementById("output").value = encrypt(x, code);
+      //
+    }
+    function Decrypt() {
+      var x = document.getElementById("output").value;
+      var code = document.getElementById("code").value;
+      document.getElementById("encrypt").value = decrypt(x, code);
+    }
+    function getSubstringCount(input, lookingFor) {
+      var amt = 0;
+      for (let i = 0; i < input.length; i++) {
+        const Char = input.charAt(i);
+        if (Char == lookingFor) {
+          amt++;
         }
-        
-      	//output += input.charAt(i);
-      	output += index + " ";
+      }
+
+      return amt;
+    }
+    function getSubstringID(input, Char, num) {
+      var Return = 0;
+      var count = 0;
+      for (let i = 0; i < input.length; i++) {
+        if (input.charAt(i) == Char) {
+          console.log(input.charAt(i) + "  " + Char);
+          if (count - 1 < num) {
+            Return = i;
+            count++;
+          }
+        }
+      }
+
+      return Return;
+    }
+
+    function getRandomCharID(input, Char) {
+      return getSubstringID(
+        input,
+        Char,
+        Math.round(Math.random() * getSubstringCount(input, Char))
+      );
+    }
+
+    function encrypt(input, key) {
+      var output = "";
+
+      for (var i = 0; i < input.length; i++) {
+        //var seed = Math.round(Math.random());
+        var index = key.indexOf(input.charAt(i));
+        var index = getRandomCharID(key, input.charAt(i));
+        //if (seed == 1) {
+        //index = key.lastIndexOf(input.charAt(i));
+        //}
+
+        //output += input.charAt(i);
+        output += index + " ";
       }
       return output;
-    } 
-
-	function decrypt(input, key) {
+    }
+    function decrypt(input, key) {
       var output = "";
       var nums = input.split(" ");
 
-      
-      for(var i = 0; i < nums.length-1; i++){
-
-      
+      for (var i = 0; i < nums.length - 1; i++) {
         //var index = input.charAt(i);
-        
-      	//output += input.charAt(i);
-      	output += key.charAt(nums[i]);
-        
-        
+
+        //output += input.charAt(i);
+        output += key.charAt(nums[i]);
       }
       return output;
-    } 
-
-
-
-</script>
-
+    }
+  </script>
 </html>
