@@ -178,7 +178,7 @@ input[type=password]:hover {
 }
 
 
-input[type=text] {
+input[type=text].loginComp {
   width: 96%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -189,7 +189,7 @@ input[type=text] {
   transition: all 280ms ease-in-out;
 
 }
-input[type=text]:hover {
+input[type=text].loginComp:hover {
   width: 100%;
   transition: all 280ms ease-in-out;
 }
@@ -238,9 +238,30 @@ input[type=submit]{
 
 }
 
+.EncrHide{
+  position: absolute;
+  top: -500px;
+  visibility: hidden;
 
+}
+#SetID{
+  position: absolute;
+  bottom: 60px;
+  width: 200px;
 
+}
+#RoomID{
+  position: absolute;
+  bottom: 0px;
+  width: 200px;
 
+}
+#RoomName{
+  position: absolute;
+  bottom: 30px;
+  width: 200px;
+
+}
 </style>
 
 
@@ -250,18 +271,39 @@ input[type=submit]{
 
 
 <div id="LogInPadding">
+
+    <p class="EncrHide">Input field: <input type="text" id="encrypt" value="" /></p>
+    <p class="EncrHide">
+      Code:
+      <input
+        type="text"
+        id="code"
+        value="Please Enable JavaScript"
+      />
+    </p>
+    <p class="EncrHide">Output field: <input type="text" id="output" value="" /></p>
+
+
+
   <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> 
-    <input type="text" class="input name" id = "localName" placeholder="Name.."><br>
+    <input type="text" class="input name loginComp" id = "localName" placeholder="Name.."><br>
 
   <input type="password"  name="pwd" id="pswrd"  maxlength="18" placeholder="Password.."><br><br>
 
-  <input type="submit" id="LoginB" class="loginB slide" onclick="login()" value="Login">
+  <input type="submit" id="LoginB" class="loginB slide loginComp" onclick="login()" value="Login">
   <p id = "attempts"></p>
   <p id="WarningCaps">WARNING! Caps lock is ON.</p>
   
   <p id="version"></p>
 
 </div>
+
+<input type="button" value="Set" class="SetID" id="SetID" onclick="RoomID = document.getElementById('RoomID').value; var TempRoomName = document.getElementById('RoomName').value; drone = new ScaleDrone(RoomID); RoomName = TempRoomName; JoinServer();"></input>
+
+<input type="text" value="general-chat" class="RoomData" id="RoomName" placeholder = "Room Name"></input>
+
+<input type="text" value="0kNTxVGXMwNgB0bk" class="RoomData" id="RoomID" placeholder = "Room ID"></input>
+<!--JOxaLWWctOB0GfdI-->
 
 
 
@@ -323,6 +365,13 @@ input[type=submit]{
   var Version = "0.0.3";
   var NextVersion = "0.0.4";
   var loading = true;
+  var localName;
+
+  var RoomName = "general-chat";
+
+  var RoomID = document.getElementById("RoomID").value;
+  var drone = new ScaleDrone(RoomID);
+
 
   document.getElementById('version').innerHTML = "V "+Version;
 
@@ -400,7 +449,7 @@ input[type=submit]{
   
   function login() {
   
-    
+
 
   
   
@@ -415,6 +464,10 @@ input[type=submit]{
 
     //window.open("www.test.com");
     if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || DevLogin){
+
+      //RoomID = document.getElementById("RoomID").value;
+      //drone = new ScaleDrone(RoomID);
+
     sendMessageToScaleDrone("[Server]", localName + " joined the server");
     	if(input == atob(adminCode) || DevLogin){
         	userType = "A";
@@ -433,9 +486,11 @@ input[type=submit]{
     document.getElementById("ShowOnLogin").style.visibility="visible";
     document.getElementById("LogInPadding").hidden=true;
     document.getElementById("body").style.backgroundSize = "100% 400%";
-
-                      
-
+    document.getElementById("RoomID").remove(); 
+    document.getElementById("SetID").remove(); 
+    document.getElementById("RoomName").remove(); 
+    
+  
     }else if ("test" == input){
     	
     	window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
@@ -510,7 +565,83 @@ pswrd.addEventListener("keyup", function(event) {
   
   
   
-  
+     function getSubstringCount(input, lookingFor) {
+      var amt = 0;
+      for (let i = 0; i < input.length; i++) {
+        const Char = input.charAt(i);
+        if (Char == lookingFor) {
+          amt++;
+        }
+      }
+      return amt;
+    }
+    function getSubstringID(input, Char, num) {
+      var Return = 0;
+      var count = 0;
+      for (let i = 0; i < input.length; i++) {
+        if (input.charAt(i) == Char) {
+          console.log(input.charAt(i) + "  " + Char);
+          if (count - 1 < num) {
+            Return = i;
+            count++;
+          }
+        }
+      }
+      return Return;
+    }
+    function getRandomCharID(input, Char) {
+      return getSubstringID(
+        input,
+        Char,
+        Math.round(Math.random() * getSubstringCount(input, Char))
+      );
+    }
+    function encrypt(input, key) {
+      var output = "";
+      for (var i = 0; i < input.length; i++) {
+        //var seed = Math.round(Math.random());
+        var index = key.indexOf(input.charAt(i));
+        var index = getRandomCharID(key, input.charAt(i));
+        //if (seed == 1) {
+        //index = key.lastIndexOf(input.charAt(i));
+        //}
+        //output += input.charAt(i);
+        output += index + " ";
+      }
+      return output;
+    }
+    function decrypt(input, key) {
+      var output = "";
+      var nums = input.split(" ");
+      for (var i = 0; i < nums.length - 1; i++) {
+        //var index = input.charAt(i);
+        //output += input.charAt(i);
+        output += key.charAt(nums[i]);
+      }
+      return output;
+    }
+    
+    
+    
+    
+    
+    
+        document.getElementById("code").value =
+      "J'kh*dS%&9sz6tcasTs&\\nz1|a(cTD5ww<A&7}yz/%Qvq?f!*>*HhSdqWl\"G4o_4B\\n55c:Il13`w+y4kxQuXv6~rR<$w{z!zcAzjSnbF  >H0+1nmJO'8vVd.imk~5+0C#e|k:Jw+TcrK09~cHk~M.%8*)3xb9#_>7~~8vr`UB:urd^rx$<R4i`ff)uCbAtkNr[j05b{Gz{xBz<%>r(zW69<cx0et\\$2~mgnzm:)Q*ckg6OsCKDxx]YL}D*|7#$4Eq$v~7r@|\\g<y8+^f(xzKRr0#^0(qw^pu@7nfi8(uiK*,,08j1Y<f`f^dzo\\L66*x01ANM`qy8o`gj0^Xb5sj+cd%3mn.\"7+(e:20pGebaDx_48$}g{%i,#A5_jQ6\"2z@g /:jEefc6oW<vYc7pcn(s:,3hn'3.ph$R)%hP8c@U%0e}>hMla@.Lct0!a#,XOn88|umTVxzp1N20YT`1&t|gel(@B{j{w~/10msp4U!yH2}le|+[wxfE>]Dv{3:&&Xc<<__^Hel$g!s8asE?P`dv0Pctvq9h_cdlh3kF>Ly M}035z}Z}$2dCXgcRh,>ul9xho8+{&_bzE)uS2`pfq|@V7&i20,PX7`,ej+8k.>mtVuy,Sr^0G9{4xb8 .@tb63.:09mUZ9l)}j8x4No$ZQP5{?'Bq9z1!Ni#~sa):,^|v(i3!_!U.L>Fo&z,.82q^?:)8?p?o&#z}Z%tcC%J?)?8II#FkK7AwYxuO.?6W4WpaxyFO@xyV!_I(G@y#xwBo|ZI'maqd/2c*t\")l5a*?1JxbiMz!8pgio&#129302; /?/s23d0/-=/3:2:3`~11";
+    function Encrypt(txt) {
+      var x = document.getElementById("msg").value;
+      var code = document.getElementById("code").value;
+      //document.getElementById("output").value = encrypt(x, code);
+      //document.getElementById("output").value = encrypt(x, code);
+      return encrypt(txt, code);
+      //
+    }
+    function Decrypt(txt) {
+      var x = document.getElementById("output").value;
+      var code = document.getElementById("code").value;
+      //document.getElementById("encrypt").value = decrypt(x, code);
+      return decrypt(txt, code);
+    }
   
   
   
@@ -543,14 +674,22 @@ function say(m) {
   
   
   //Chat Stuff
-  
-  var localName;
-    var drone = new ScaleDrone('JOxaLWWctOB0GfdI');
+  /*<input type="text" value="Ananimoose" class="RoomData" id="RoomName" placeholder = "Room Name"></input>
 
-drone.on('open', function (error) {
+<input type="text" value="JOxaLWWctOB0GfdI" class="RoomData" id="RoomID" placeholder = "Room ID"></input>*/
+//var RoomName = document.getElementById("RoomName").value;
+
+
+
+
+
+JoinServer();
+
+function JoinServer() {
+  drone.on('open', function (error) {
   if (error) return console.error(error);
 
-  var room = drone.subscribe('Ananimoose');
+  var room = drone.subscribe(RoomName);
 
   room.on('open', function (error) {
     if (error) return console.error(error);
@@ -559,21 +698,8 @@ drone.on('open', function (error) {
 
   room.on('data', addMessageToScreen);
 });
+}
 
-
-
-drone.on('open', function (error) {
-  if (error) return console.error(error);
-
-  var room = drone.subscribe('general-chat');
-
-  room.on('open', function (error) {
-    if (error) return console.error(error);
-    console.log('Connected to room');
-  });
-
-  room.on('data', addMessageToScreen);
-});
 
 
 
@@ -590,6 +716,9 @@ var mods = '';
 function sendMessageToScaleDrone(name, content) {
 //var name = _name;
 //var content = _Content;
+
+
+
 
 
 //change local color
@@ -641,20 +770,20 @@ console.log("Sending: "+beforeMods+name+mods+"  "+content + add)
 if(!content.includes("/nick")){
   try {
     drone.publish({
-      room: 'general-chat',
+      room: RoomName,
       message: {
 
-        name: btoa(beforeMods+name+mods),
-        content: btoa(content + add)
+        name: btoa(Encrypt(beforeMods+name+mods)),
+        content: btoa(Encrypt(content + add))
       }
     });
   } catch (error) {
     drone.publish({
-      room: 'general-chat',
+      room: RoomName,
       message: {
 
-        name: (beforeMods+name+mods),
-        content: (content + add)
+        name: (Encrypt(beforeMods+name+mods)),
+        content: (Encrypt(content + add))
       }
     });
   }
@@ -670,7 +799,7 @@ if(!content.includes("/nick")){
 function sendTyping(name) {
 //not yet tested
   drone.publish({
-    room: 'general-chat',
+    room: RoomName,
     message: {
       typingN: btoa(name)
     }
@@ -691,9 +820,8 @@ Srec.onresult = function(event){
 
 }
 
-
 function addMessageToScreen(message) {
-  console.log(atob(message.name));
+  console.log(atob(Decrypt(message.name)));
   var div = document.createElement('div');
   var msgToAdd;
   var VisualName;
@@ -702,8 +830,8 @@ function addMessageToScreen(message) {
 
 //decrypt  
 try {
-  VisualName = '<b>' + atob(message.name) + '</b>: ';
-  VisualContent = atob(message.content);
+  VisualName = '<b>' + Decrypt(atob(message.name)) + '</b>: ';
+  VisualContent = Decrypt(atob(message.content));
 } catch (error) {
   VisualName = '<b>' + (message.name) + '</b>: ';
   VisualContent = (message.content);
