@@ -178,7 +178,7 @@ input[type=password]:hover {
 }
 
 
-input[type=text] {
+input[type=text].loginComp {
   width: 96%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -189,7 +189,7 @@ input[type=text] {
   transition: all 280ms ease-in-out;
 
 }
-input[type=text]:hover {
+input[type=text].loginComp:hover {
   width: 100%;
   transition: all 280ms ease-in-out;
 }
@@ -244,8 +244,24 @@ input[type=submit]{
   visibility: hidden;
 
 }
+#SetID{
+  position: absolute;
+  bottom: 60px;
+  width: 200px;
 
+}
+#RoomID{
+  position: absolute;
+  bottom: 0px;
+  width: 200px;
 
+}
+#RoomName{
+  position: absolute;
+  bottom: 30px;
+  width: 200px;
+
+}
 </style>
 
 
@@ -270,17 +286,24 @@ input[type=submit]{
 
 
   <h2 id="RemoveOnLogIn"><b> <font face="verdana" color="white">Login:</b></h2> 
-    <input type="text" class="input name" id = "localName" placeholder="Name.."><br>
+    <input type="text" class="input name loginComp" id = "localName" placeholder="Name.."><br>
 
   <input type="password"  name="pwd" id="pswrd"  maxlength="18" placeholder="Password.."><br><br>
 
-  <input type="submit" id="LoginB" class="loginB slide" onclick="login()" value="Login">
+  <input type="submit" id="LoginB" class="loginB slide loginComp" onclick="login()" value="Login">
   <p id = "attempts"></p>
   <p id="WarningCaps">WARNING! Caps lock is ON.</p>
   
   <p id="version"></p>
 
 </div>
+
+<input type="button" value="Set" class="SetID" id="SetID" onclick="RoomID = document.getElementById('RoomID').value; var TempRoomName = document.getElementById('RoomName').value; drone = new ScaleDrone(RoomID); RoomName = TempRoomName; JoinServer();"></input>
+
+<input type="text" value="general-chat" class="RoomData" id="RoomName" placeholder = "Room Name"></input>
+
+<input type="text" value="0kNTxVGXMwNgB0bk" class="RoomData" id="RoomID" placeholder = "Room ID"></input>
+<!--JOxaLWWctOB0GfdI-->
 
 
 
@@ -342,6 +365,13 @@ input[type=submit]{
   var Version = "0.0.3";
   var NextVersion = "0.0.4";
   var loading = true;
+  var localName;
+
+  var RoomName = "general-chat";
+
+  var RoomID = document.getElementById("RoomID").value;
+  var drone = new ScaleDrone(RoomID);
+
 
   document.getElementById('version').innerHTML = "V "+Version;
 
@@ -419,7 +449,7 @@ input[type=submit]{
   
   function login() {
   
-    
+
 
   
   
@@ -434,6 +464,10 @@ input[type=submit]{
 
     //window.open("www.test.com");
     if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || DevLogin){
+
+      //RoomID = document.getElementById("RoomID").value;
+      //drone = new ScaleDrone(RoomID);
+
     sendMessageToScaleDrone("[Server]", localName + " joined the server");
     	if(input == atob(adminCode) || DevLogin){
         	userType = "A";
@@ -452,9 +486,11 @@ input[type=submit]{
     document.getElementById("ShowOnLogin").style.visibility="visible";
     document.getElementById("LogInPadding").hidden=true;
     document.getElementById("body").style.backgroundSize = "100% 400%";
-
-                      
-
+    document.getElementById("RoomID").remove(); 
+    document.getElementById("SetID").remove(); 
+    document.getElementById("RoomName").remove(); 
+    
+  
     }else if ("test" == input){
     	
     	window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
@@ -638,14 +674,22 @@ function say(m) {
   
   
   //Chat Stuff
-  
-  var localName;
-    var drone = new ScaleDrone('JOxaLWWctOB0GfdI');
+  /*<input type="text" value="Ananimoose" class="RoomData" id="RoomName" placeholder = "Room Name"></input>
 
-drone.on('open', function (error) {
+<input type="text" value="JOxaLWWctOB0GfdI" class="RoomData" id="RoomID" placeholder = "Room ID"></input>*/
+//var RoomName = document.getElementById("RoomName").value;
+
+
+
+
+
+JoinServer();
+
+function JoinServer() {
+  drone.on('open', function (error) {
   if (error) return console.error(error);
 
-  var room = drone.subscribe('Ananimoose');
+  var room = drone.subscribe(RoomName);
 
   room.on('open', function (error) {
     if (error) return console.error(error);
@@ -654,21 +698,8 @@ drone.on('open', function (error) {
 
   room.on('data', addMessageToScreen);
 });
+}
 
-
-
-drone.on('open', function (error) {
-  if (error) return console.error(error);
-
-  var room = drone.subscribe('general-chat');
-
-  room.on('open', function (error) {
-    if (error) return console.error(error);
-    console.log('Connected to room');
-  });
-
-  room.on('data', addMessageToScreen);
-});
 
 
 
@@ -685,6 +716,8 @@ var mods = '';
 function sendMessageToScaleDrone(name, content) {
 //var name = _name;
 //var content = _Content;
+
+
 
 
 
@@ -737,7 +770,7 @@ console.log("Sending: "+beforeMods+name+mods+"  "+content + add)
 if(!content.includes("/nick")){
   try {
     drone.publish({
-      room: 'general-chat',
+      room: RoomName,
       message: {
 
         name: btoa(Encrypt(beforeMods+name+mods)),
@@ -746,7 +779,7 @@ if(!content.includes("/nick")){
     });
   } catch (error) {
     drone.publish({
-      room: 'general-chat',
+      room: RoomName,
       message: {
 
         name: (Encrypt(beforeMods+name+mods)),
@@ -766,7 +799,7 @@ if(!content.includes("/nick")){
 function sendTyping(name) {
 //not yet tested
   drone.publish({
-    room: 'general-chat',
+    room: RoomName,
     message: {
       typingN: btoa(name)
     }
@@ -786,7 +819,6 @@ Srec.onresult = function(event){
     element.value = transcript;
 
 }
-
 
 function addMessageToScreen(message) {
   console.log(atob(Decrypt(message.name)));
