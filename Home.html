@@ -298,7 +298,16 @@ input[type=submit]{
 
 </div>
 
-<input type="button" value="Set" class="SetID" id="SetID" onclick="RoomID = document.getElementById('RoomID').value; var TempRoomName = document.getElementById('RoomName').value; drone = new ScaleDrone(RoomID); RoomName = TempRoomName; JoinServer();"></input>
+<input type="button" value="Set" class="SetID" id="SetID" onclick="
+var RoomID = document.getElementById('RoomID').value; 
+var TempRoomName = document.getElementById('RoomName').value; 
+if(TempRoomName == 'Kevin'){
+document.getElementById('RoomID').value = 'SmrEQk7hQ5IoQJGm';
+}
+RoomID = document.getElementById('RoomID').value; 
+drone = new ScaleDrone(RoomID);
+RoomName = TempRoomName; 
+JoinServer();"></input>
 
 <input type="text" value="general-chat" class="RoomData" id="RoomName" placeholder = "Room Name"></input>
 
