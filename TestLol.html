@@ -1116,6 +1116,10 @@ pswrd.addEventListener("keyup", function(event) {
   
   //img.src = "";
   img.setAttribute("src", url);
+  if(img.width > 800){ 
+    img.setAttribute("width", "10%");
+    img.setAttribute("height", "10%");
+  }
   
   div.classList.add('message');
   //Error wont set color
