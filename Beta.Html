@@ -1125,11 +1125,11 @@ pswrd.addEventListener("keyup", function(event) {
   //Error wont set color
   div.style.color = col;
   
+
+  document.querySelector('.text-area').appendChild(div);
   if(isImg){
   	document.querySelector('.text-area').appendChild(img);
-  }
-  document.querySelector('.text-area').appendChild(div);
-  
+  }  
   
   //autoScroll to bottom
 	window.scrollTo(0, 100000000000);	
