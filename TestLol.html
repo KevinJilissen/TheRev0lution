@@ -1114,7 +1114,8 @@ pswrd.addEventListener("keyup", function(event) {
   msgToAdd = colorSplitter[1] + VisualContent;
   div.innerHTML = msgToAdd;
   
-  img.src = "";
+  //img.src = "";
+  img.setAttribute("src", url);
   
   div.classList.add('message');
   //Error wont set color
