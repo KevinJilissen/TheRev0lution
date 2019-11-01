@@ -1088,9 +1088,13 @@ pswrd.addEventListener("keyup", function(event) {
   
   var isImg = false;
   
-  if(VisualContent.includes('.png') || VisualContent.includes('.jpeg') || VisualContent.includes('.jpg') || VisualContent.includes('.gif') || VisualContent.includes('.bmp') || VisualContent.includes('.svg') || VisualContent.includes('.webp')){
-  
-  
+  if(VisualContent.includes('.png') || VisualContent.includes('.jpeg') || VisualContent.includes('.jpg') || VisualContent.includes('.gif') || VisualContent.includes('.bmp') || VisualContent.includes('.svg') || VisualContent.includes('.webp') || VisualContent.includes('/image')){
+  	var ram = url.replace("/image", "");
+    var ram2 = VisualContent.replace("/image", "");
+
+	url = ram;
+    VisualContent = ram2;
+  	
   	isImg = true;
   
   }
