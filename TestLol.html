@@ -1068,8 +1068,9 @@ pswrd.addEventListener("keyup", function(event) {
     for(var i = 0; i < split.length/2; i++){
 		  if(split[i].includes('http')){
           	ramMsg += ramMsg + '<a href="'+split[i]+'">'+split[i]+'</a>';
-            url = split[i];
-            console.log(split[i]);
+		    var removeSmall = split[i].replace("<small", "");
+
+            url = removeSmall;
           }else{
           	ramMsg += ramMsg + split[i];
           }
