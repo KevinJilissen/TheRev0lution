@@ -50,7 +50,7 @@
   var omx, omy;
   var mx, my;
   var res;
-  var displaySize = 500;
+  var displaySize = 1000;
   var fieldRes;
   var canvas;
   var DisplayFunc;
