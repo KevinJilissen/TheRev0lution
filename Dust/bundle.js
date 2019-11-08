@@ -96,7 +96,7 @@
 	  var omx, omy;
 	  var mx, my;
 	  var res;
-	  var displaySize = 500;
+	  var displaySize = 1000;
 	  var fieldRes;
 	  var canvas;
 	  var DisplayFunc;
@@ -520,11 +520,11 @@
 	      },
 	      drawFrame: function() {
 	          Cursor();
-	          this.context.fillRect(0, 0, 500, 500);
+	          this.context.fillRect(0, 0, displaySize, displaySize);
 	          this.context.fillStyle = husl.p.toHex(40, 60, 2); ////t'#0010'+offset.toString(16);
 	          this.context.fill();
 	          updatePressure();
-	          this.imageData = this.context.getImageData(0, 0, 500, 500);
+	          this.imageData = this.context.getImageData(0, 0, displaySize, displaySize);
 	          for (var i = 0; i < particles.length; i++) {
 	              particles[i].tick();
 	              if (particles[i]) this.drawParticle(particles[i]);
