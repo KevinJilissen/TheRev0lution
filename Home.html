@@ -589,7 +589,6 @@ pswrd.addEventListener("keyup", function(event) {
       var count = 0;
       for (let i = 0; i < input.length; i++) {
         if (input.charAt(i) == Char) {
-          console.log(input.charAt(i) + "  " + Char);
           if (count - 1 < num) {
             Return = i;
             count++;
@@ -775,7 +774,6 @@ var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var add = "<small class='time'>"+time+"</small>";
 
-console.log("Sending: "+beforeMods+name+mods+"  "+content + add)
 if(!content.includes("/nick")){
   try {
     drone.publish({
@@ -822,7 +820,6 @@ Srec.onstart = function(){
 Srec.onresult = function(event){
     const current = event.resultIndex;
     const transcript = event.results[current][0].transcript;
-    console.log(transcript);
     var element = document.getElementById("msg");
 
     element.value = transcript;
@@ -830,7 +827,6 @@ Srec.onresult = function(event){
 }
 
 function addMessageToScreen(message) {
-  console.log(atob(Decrypt(message.name)));
   var div = document.createElement('div');
   var msgToAdd;
   var VisualName;
@@ -988,7 +984,6 @@ pswrd.addEventListener("keyup", function(event) {
 
     
 
-    console.log(colorThing);
     //LocalCol = removeExtras.substring(1, 4);
     LocalCol = FinalCol;
   }*/
@@ -1065,6 +1060,7 @@ pswrd.addEventListener("keyup", function(event) {
 	  }
   
   //URLS
+  var url = "";
   if(VisualContent.includes('http')){
 
     var split = VisualContent.split(" ");
@@ -1072,6 +1068,10 @@ pswrd.addEventListener("keyup", function(event) {
     for(var i = 0; i < split.length/2; i++){
 		  if(split[i].includes('http')){
           	ramMsg += ramMsg + '<a href="'+split[i]+'">'+split[i]+'</a>';
+		    var removeSmall = split[i].replace("<small", "");
+
+            url = removeSmall;
+            console.log(url);
           }else{
           	ramMsg += ramMsg + split[i];
           }
@@ -1085,6 +1085,19 @@ pswrd.addEventListener("keyup", function(event) {
     //VisualContent = 'LINK';
 
   }   
+  
+  var isImg = false;
+  
+  if(VisualContent.includes('.png') || VisualContent.includes('.jpeg') || VisualContent.includes('.jpg') || VisualContent.includes('.gif') || VisualContent.includes('.bmp') || VisualContent.includes('.svg') || VisualContent.includes('.webp') || VisualContent.includes('/image')){
+  	var ram = url.replace("/image", "");
+    var ram2 = VisualContent.replace("/image", "");
+
+	url = ram;
+    VisualContent = ram2;
+  	
+  	isImg = true;
+  
+  }
    
    
   var colorSplitter = "";
@@ -1092,20 +1105,35 @@ pswrd.addEventListener("keyup", function(event) {
   
   //remove <b>
   var col = colorSplitter[0].replace("<b>", "");
-  //remove seccond <b>
+  //remove second <b>
  col = col.replace("<b>", "");
 
   
   //colorSplitter[0];  
-  console.log(col);
   //msgToAdd = VisualName + VisualContent;
+  var img = document.createElement('img');
+
+  
+  
   msgToAdd = colorSplitter[1] + VisualContent;
   div.innerHTML = msgToAdd;
+  
+  //img.src = "";
+  img.setAttribute("src", url);
+  if(img.width > 800){ 
+    img.setAttribute("width", "10%");
+    img.setAttribute("height", "10%");
+  }
+  
   div.classList.add('message');
   //Error wont set color
   div.style.color = col;
-  document.querySelector('.text-area').appendChild(div);
   
+
+  document.querySelector('.text-area').appendChild(div);
+  if(isImg){
+  	document.querySelector('.text-area').appendChild(img);
+  }  
   
   //autoScroll to bottom
 	window.scrollTo(0, 100000000000);	
@@ -1148,3 +1176,6 @@ if (event.getModifierState("CapsLock")) {
 
 </body>
 </html>
+
+
+
