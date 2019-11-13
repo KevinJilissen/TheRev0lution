@@ -604,12 +604,17 @@ pswrd.addEventListener("keyup", function(event) {
         Math.round(Math.random() * getSubstringCount(input, Char))
       );
     }
-    function encrypt(input, key) {
+    function encrypt(input, key, offset) {
       var output = "";
       for (var i = 0; i < input.length; i++) {
         //var seed = Math.round(Math.random());
-        var index = key.indexOf(input.charAt(i));
-        var index = getRandomCharID(key, input.charAt(i));
+        //var index = key.indexOf(input.charAt(i));
+        if(offset > input.length){
+        	offset = -offset;
+        	
+        }
+        
+        var index = parseInt(getRandomCharID(key, input.charAt(i)))+offset;
         //if (seed == 1) {
         //index = key.lastIndexOf(input.charAt(i));
         //}
@@ -618,13 +623,17 @@ pswrd.addEventListener("keyup", function(event) {
       }
       return output;
     }
-    function decrypt(input, key) {
+    function decrypt(input, key, offset) {
       var output = "";
       var nums = input.split(" ");
       for (var i = 0; i < nums.length - 1; i++) {
+        if(offset > input.length){
+        	offset = -offset;
+        	
+        }
         //var index = input.charAt(i);
         //output += input.charAt(i);
-        output += key.charAt(nums[i]);
+        output += key.charAt(nums[i-offset]);
       }
       return output;
     }
@@ -641,14 +650,14 @@ pswrd.addEventListener("keyup", function(event) {
       var code = document.getElementById("code").value;
       //document.getElementById("output").value = encrypt(x, code);
       //document.getElementById("output").value = encrypt(x, code);
-      return encrypt(txt, code);
+      return encrypt(txt, code,0);
       //
     }
     function Decrypt(txt) {
       var x = document.getElementById("output").value;
       var code = document.getElementById("code").value;
       //document.getElementById("encrypt").value = decrypt(x, code);
-      return decrypt(txt, code);
+      return decrypt(txt, code,0);
     }
   
   
@@ -1088,9 +1097,13 @@ pswrd.addEventListener("keyup", function(event) {
   
   var isImg = false;
   
-  if(VisualContent.includes('.png') || VisualContent.includes('.jpeg') || VisualContent.includes('.jpg')){
-  
-  
+  if(VisualContent.includes('.png') || VisualContent.includes('.jpeg') || VisualContent.includes('.jpg') || VisualContent.includes('.gif') || VisualContent.includes('.bmp') || VisualContent.includes('.svg') || VisualContent.includes('.webp') || VisualContent.includes('/image')){
+  	var ram = url.replace("/image", "");
+    var ram2 = VisualContent.replace("/image", "");
+
+	url = ram;
+    VisualContent = ram2;
+  	
   	isImg = true;
   
   }
@@ -1125,11 +1138,11 @@ pswrd.addEventListener("keyup", function(event) {
   //Error wont set color
   div.style.color = col;
   
+
+  document.querySelector('.text-area').appendChild(div);
   if(isImg){
   	document.querySelector('.text-area').appendChild(img);
-  }
-  document.querySelector('.text-area').appendChild(div);
-  
+  }  
   
   //autoScroll to bottom
 	window.scrollTo(0, 100000000000);	
