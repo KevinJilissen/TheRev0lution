@@ -360,14 +360,32 @@ JoinServer();"></input>
         <input type="text" class="input content" id = "msg" placeholder="Message..">
         <button type="submit" class="input button"s id="SendMSG" value="Send">Send <i class="fas fa-share"></i></button>
         <button class="Speech" onclick="Srec.start()"><i class="fas fa-microphone"></i></button>
-        
+        <div id="dropbox">
+    
+          <form class="my-form">
+            <div class="form_line">
+              <div class="form_controls">
+                <div class="upload_button_holder">
+                  <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+                  <a href="#" id="fileSelect">Upload Image(s)</a>
+                  <a href="#" id="urlSelect"></a>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="progress-bar" id="progress-bar">
+            <div class="progress" id="progress"></div>
+          </div>
+          <div id="gallery" />
+        </div>
+        </div>
+
       </form>
     </div>
  </div>
  
  
  </div>
-
 
 
 <script>
@@ -392,6 +410,10 @@ JoinServer();"></input>
   var passcode = /*"dGVzdA=="*/"YmFuYW5h";
   var adminCode = "d2luZHlsaWdodDEz";
   var attempts = 3;
+
+
+  var urlSendBridge;
+
   
   //var colors = {"red","white","blue","green","green"};
   //var LocalColorID = Math.floor(Math.random()*4);
@@ -1088,14 +1110,15 @@ pswrd.addEventListener("keyup", function(event) {
   
   var isImg = false;
   
-  if(VisualContent.includes('.png') || VisualContent.includes('.jpeg') || VisualContent.includes('.jpg') || VisualContent.includes('.gif') || VisualContent.includes('.bmp') || VisualContent.includes('.svg') || VisualContent.includes('.webp') || VisualContent.includes('/image')){
-  	var ram = url.replace("/image", "");
-    var ram2 = VisualContent.replace("/image", "");
+  if(VisualContent.includes('.png') || VisualContent.includes('.jpeg') || VisualContent.includes('.jpg') || VisualContent.includes('.gif') || VisualContent.includes('.bmp') || VisualContent.includes('.svg') || VisualContent.includes('.webp') || VisualContent.includes('/img')){
+  	var ram = url.replace("/img", "");
+    var ram2 = VisualContent.replace("/img", "");
 
 	url = ram;
     VisualContent = ram2;
   	
-  	isImg = true;
+    isImg = true;
+    console.log(url);
   
   }
    
@@ -1119,7 +1142,10 @@ pswrd.addEventListener("keyup", function(event) {
   div.innerHTML = msgToAdd;
   
   //img.src = "";
-  img.setAttribute("src", url);
+  //img.setAttribute("src", url);
+
+  img.src = url;
+
   if(img.width > 800){ 
     img.setAttribute("width", "10%");
     img.setAttribute("height", "10%");
@@ -1179,3 +1205,4 @@ if (event.getModifierState("CapsLock")) {
 
 
 
+<script  src="upload.js"></script>
