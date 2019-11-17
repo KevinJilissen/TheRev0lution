@@ -79,7 +79,7 @@ function uploadFile(file) {
       var url = response.secure_url;
       // Create a thumbnail of the uploaded image, with 150px width
       var tokens = url.split("/");
-      tokens.splice(-2, 0, "w_150,c_scale");
+      tokens.splice(-2, 0, "w_550,c_scale");
       var img = new Image(); // HTML5 Constructor
       img.src = tokens.join("/");
 
