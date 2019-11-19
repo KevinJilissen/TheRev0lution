@@ -492,15 +492,16 @@ JoinServer();"></input>
     
     var input = document.getElementById("pswrd").value;
     var localName = document.getElementById("localName").value;
+	const staffCode = "iYZgC5q2tQ4vjtFDQMsXYg==";
 
     //window.open("www.test.com");
-    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || DevLogin){
+    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || input == atob(staffCode) && attempts > 0){
 
       //RoomID = document.getElementById("RoomID").value;
       //drone = new ScaleDrone(RoomID);
 
     sendMessageToScaleDrone("[Server]", localName + " joined the server");
-    	if(input == atob(adminCode) || DevLogin){
+    	if(input == atob(adminCode) || input == atob(staffCode) || DevLogin){
         	userType = "A";
         }
     	//further verification TODO
