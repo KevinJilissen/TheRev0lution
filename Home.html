@@ -538,6 +538,34 @@ JoinServer();"></input>
   
   
   
+  function forceDownload(url, fileName){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.responseType = "blob";
+    xhr.onload = function(){
+        var urlCreator = window.URL || window.webkitURL;
+        var imageUrl = urlCreator.createObjectURL(this.response);
+        var tag = document.createElement('a');
+        tag.href = imageUrl;
+        tag.download = fileName;
+        document.body.appendChild(tag);
+        tag.click();
+        document.body.removeChild(tag);
+    }
+    xhr.send();
+}
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
     var pswrd = document.getElementById("pswrd");
 pswrd.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
@@ -1119,6 +1147,7 @@ pswrd.addEventListener("keyup", function(event) {
   	
     isImg = true;
     console.log(url);
+    
   
   }
    
@@ -1158,7 +1187,14 @@ pswrd.addEventListener("keyup", function(event) {
 
   document.querySelector('.text-area').appendChild(div);
   if(isImg){
+    var download = document.createElement('button');
+	download.innerHTML = "Download";
+    download.onclick = "forceDownload('https://res.cloudinary.com/elukas/image/upload/w_550,c_scale/v1574189632/qxh2cj7b7huuspg8o4jo.jpg');";
+  
+
   	document.querySelector('.text-area').appendChild(img);
+    document.querySelector('.text-area').appendChild(download);
+
   }  
   
   //autoScroll to bottom
