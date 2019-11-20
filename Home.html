@@ -303,11 +303,12 @@ var RoomID = document.getElementById('RoomID').value;
 var TempRoomName = document.getElementById('RoomName').value; 
 if(TempRoomName == 'Kevin'){
 document.getElementById('RoomID').value = 'SmrEQk7hQ5IoQJGm';
+document.getElementById('pswrd').value = 'snek';
 }
 RoomID = document.getElementById('RoomID').value; 
 drone = new ScaleDrone(RoomID);
 RoomName = TempRoomName; 
-JoinServer();"></input>
+JoinServer();   "></input>
 
 <input type="text" value="general-chat" class="RoomData" id="RoomName" placeholder = "Room Name"></input>
 
@@ -495,7 +496,12 @@ JoinServer();"></input>
 	const staffCode = "iYZgC5q2tQ4vjtFDQMsXYg==";
 
     //window.open("www.test.com");
-    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || input == atob(staffCode) && attempts > 0){
+    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || input == atob(staffCode) && attempts > 0 || input == "robby" && attempts > 0 || input == "snek" && attempts > 0){
+	/*if(input == "snek"){
+      document.getElementById('RoomName').value = "Kevin"; 
+      document.getElementById('RoomID').value = 'SmrEQk7hQ5IoQJGm';
+	}*/
+
 
       //RoomID = document.getElementById("RoomID").value;
       //drone = new ScaleDrone(RoomID);
