@@ -792,22 +792,8 @@ LocalCol = document.getElementById("userCol").value;
 //Remove swears
 
 
-  var BannedWords = ['ZnVjaw==', 'Yml0Y2g=', 'YXNz', 'Y3VudA==', 'c2hpdA=='];
-  var ReplaceWords = ['duck', 'B****', 'A**', 'C***', ':poop:'];
-  
-  for(var i = 0; i < 5; i++){
-  	if(content.toLowerCase().includes(atob(BannedWords[i]))){
-    	content = content.toLowerCase().replace(atob(BannedWords[i]), ReplaceWords[i]);
-    	
-    	
-    }
-    if(name.toLowerCase().includes(atob(BannedWords[i]))){
-    	name = name.toLowerCase().replace(atob(BannedWords[i]), ReplaceWords[i]);
 
-    	
-    }
-  }
-  var beforeMods = "";
+var beforeMods = "";
 //add modifigers
   if(localName == 'TestBot' && userType == "A"){
     mods = '&#129302; /?/s23d0/-=/3:2:3`~11';
@@ -906,7 +892,11 @@ try {
     
   }
   
-  
+
+
+
+
+
   
   //Making as read
     var pswrd = document.getElementById("SendMSG");
@@ -961,6 +951,9 @@ pswrd.addEventListener("keyup", function(event) {
     VisualContent = SwapedMsg;
 
   }
+  
+
+
   
   //
   if(VisualContent.includes(':P')){
@@ -1157,6 +1150,28 @@ pswrd.addEventListener("keyup", function(event) {
     
   
   }
+
+
+  var antiSwear = false;
+
+  if(antiSwear == true){
+    var BannedWords = ['ZnVjaw==', 'Yml0Y2g=', 'YXNz', 'Y3VudA==', 'c2hpdA=='];
+  var ReplaceWords = ['duck', 'B****', 'A**', 'C***', ':poop:'];
+  
+  for(var i = 0; i < 5; i++){
+  	if(VisualContent.toLowerCase().includes(atob(BannedWords[i]))){
+    	VisualContent = VisualContent.toLowerCase().replace(atob(BannedWords[i]), ReplaceWords[i]);
+    	
+    	
+    }
+    if(VisualName.toLowerCase().includes(atob(BannedWords[i]))){
+    	VisualName = VisualName.toLowerCase().replace(atob(BannedWords[i]), ReplaceWords[i]);
+
+    	
+    }
+  }
+  }
+
    
    
   var colorSplitter = "";
