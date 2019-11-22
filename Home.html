@@ -303,7 +303,7 @@ var RoomID = document.getElementById('RoomID').value;
 var TempRoomName = document.getElementById('RoomName').value; 
 if(TempRoomName == 'Kevin'){
 document.getElementById('RoomID').value = 'SmrEQk7hQ5IoQJGm';
-document.getElementById('pswrd').value = 'snek';
+document.getElementById('pswrd').value = 'yes';
 }
 RoomID = document.getElementById('RoomID').value; 
 drone = new ScaleDrone(RoomID);
@@ -533,6 +533,10 @@ JoinServer();   "></input>
     	
     	window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 
+    }else{
+      if(!document.getElementById("attempts").innerHTML.includes("0")){
+        sendMessageToScaleDrone(localName," just tried to log in, but failed with "+document.getElementById("attempts").innerHTML+" attempts left");
+      }
     }
 
 
