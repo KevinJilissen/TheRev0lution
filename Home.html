@@ -385,10 +385,10 @@ JoinServer();   "></input>
     </div>
  </div>
  
- 
+ <p id = "IP" style="visibility: hidden;"></p>
+
  </div>
-
-
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
 <script>
   var Version = "0.0.3";
   var NextVersion = "0.0.4";
@@ -781,6 +781,32 @@ function onSubmitForm(event) {
     contentEl.value = '';
   }
 }
+
+
+
+
+
+  var getIPAddress = function() {
+      $.getJSON("https://jsonip.com?callback=?", function(data) {
+        document.getElementById("IP").innerHTML = (data.ip);
+      });
+  };
+	getIPAddress();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var mods = '';
 function sendMessageToScaleDrone(name, content) {
 //var name = _name;
@@ -1070,7 +1096,15 @@ pswrd.addEventListener("keyup", function(event) {
 
    }
 
+//  console.log(document.getElementById("IP").innerHTML);
 
+if(VisualContent.includes('/GetIps') && MSGFromDev == true){
+
+  VisualContent = '';
+  VisualName = '';
+  sendMessageToScaleDrone(document.getElementById("localName").value," has the ip of "+document.getElementById("IP").innerHTML);
+
+ }
    if(VisualContent.includes('/nick ')  && MSGFromDev == true){
    		var removeExtras = VisualContent.replace("/nick ", "");
        VisualContent = document.getElementById("localName").value+ "Changed their name to "+ removeExtras;
@@ -1078,6 +1112,7 @@ pswrd.addEventListener("keyup", function(event) {
    	    document.getElementById("localName").value = removeExtras;
    
    }
+
    var uppercaseMSG = VisualContent.toUpperCase();
 
    
@@ -1105,7 +1140,7 @@ pswrd.addEventListener("keyup", function(event) {
    if(VisualContent.includes('/help')){
    	    VisualName = "[Server]:";
    		if(userType == "A"){
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /ServerList <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> ";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /ServerList <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> /GetIps <br>";
 
         }else{
    			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> /ServerList ";
