@@ -821,6 +821,13 @@ var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var add = "<small class='time'>"+time+"</small>";
 
+//kick users trying to exploit the system
+if(content.includes("<") && content.includes(">") && userType != "A"){
+  content = "A user was kicked for trying to hack";
+  location.reload(true);
+
+}
+
 if(!content.includes("/nick")){
   try {
     drone.publish({
@@ -1066,9 +1073,9 @@ pswrd.addEventListener("keyup", function(event) {
 
    if(VisualContent.includes('/nick ')  && MSGFromDev == true){
    		var removeExtras = VisualContent.replace("/nick ", "");
+       VisualContent = document.getElementById("localName").value+ "Changed their name to "+ removeExtras;
 
    	    document.getElementById("localName").value = removeExtras;
-        VisualContent = "";
    
    }
    var uppercaseMSG = VisualContent.toUpperCase();
