@@ -1062,7 +1062,10 @@ pswrd.addEventListener("keyup", function(event) {
     var SwapedMsg = VisualContent.replace(":microsoft:", "<i class='fab fa-microsoft'></i>");
     VisualContent = SwapedMsg;
   }  
-    
+  if(VisualContent.includes('/me')){
+    var SwapedMsg = VisualContent.replace("/me", "");
+    VisualContent = "<i>"+SwapedMsg+"</i>";
+  }      
   
   //<i class="fab fa-microsoft"></i>
   
