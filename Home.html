@@ -1173,6 +1173,7 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
   
   //URLS
   var url = "";
+  var pureUrl = "";
   if(VisualContent.includes('http')){
 
     var split = VisualContent.split(" ");
@@ -1183,19 +1184,20 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
 		    var removeSmall = split[i].replace("<small", "");
 
             url = removeSmall;
+            pureUrl = url;
             console.log(url);
           }else{
           	ramMsg += ramMsg + split[i];
           }
     }
     
+
   var removeTimeHtml = ramMsg.replace("<small", "");
 
     
     
     VisualContent = removeTimeHtml;
     //VisualContent = 'LINK';
-
   }   
   
   var isImg = false;
@@ -1221,7 +1223,7 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
     var ram2 = VisualContent.replace("/vid", "");
 
 	url = ram;
-    VisualContent = ram2;
+    //VisualContent = ram2;
   	
     isVid = true;
     console.log(url);
@@ -1287,10 +1289,11 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
   document.querySelector('.text-area').appendChild(div);
   if(isVid){
     var download = document.createElement('video');
-	download.innerHTML = "<source src='"+url+"'>";
-    img.setAttribute("width", "10%");
-    img.setAttribute("height", "10%");
-
+	download.innerHTML = "<source src='"+pureUrl+"'>";
+    //download.setAttribute("width", "40%");
+    //download.setAttribute("height", "40%");
+    download.controls = true;
+    
     document.querySelector('.text-area').appendChild(download);
 
   }  
