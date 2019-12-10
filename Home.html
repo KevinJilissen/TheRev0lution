@@ -1062,16 +1062,16 @@ pswrd.addEventListener("keyup", function(event) {
     var SwapedMsg = VisualContent.replace(":microsoft:", "<i class='fab fa-microsoft'></i>");
     VisualContent = SwapedMsg;
   }  
-  if(VisualContent.includes('/me')){
-    var SwapedMsg = VisualContent.replace("/me", "");
+  if(VisualContent.includes('?me')){
+    var SwapedMsg = VisualContent.replace("?me", "");
     VisualContent = "<i>"+SwapedMsg+"</i>";
   }      
-  if(VisualContent.includes('/b')){
-    var SwapedMsg = VisualContent.replace("/b", "");
+  if(VisualContent.includes('?b')){
+    var SwapedMsg = VisualContent.replace("?b", "");
     VisualContent = "<b>"+SwapedMsg+"</b>";
   }   
-  if(VisualContent.includes('/-')){
-    var SwapedMsg = VisualContent.replace("/-", "");
+  if(VisualContent.includes('?-')){
+    var SwapedMsg = VisualContent.replace("?-", "");
     VisualContent = "<strike>"+SwapedMsg+"</strike>";
   }    
   //<i class="fab fa-microsoft"></i>
