@@ -1212,7 +1212,22 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
     
   
   }
+  
+  
+  var isVid = false;
+  
+  if(VisualContent.includes('.mov') || VisualContent.includes('.mp4') || VisualContent.includes('.flv') || VisualContent.includes('.avi') || VisualContent.includes('.wmv') || VisualContent.includes('.av3') || VisualContent.includes('.mkv') || VisualContent.includes('/vid')){
+  	var ram = url.replace("/vid", "");
+    var ram2 = VisualContent.replace("/vid", "");
 
+	url = ram;
+    VisualContent = ram2;
+  	
+    isVid = true;
+    console.log(url);
+    
+  
+  }
 
   var antiSwear = false;
 
@@ -1270,16 +1285,18 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
   
 
   document.querySelector('.text-area').appendChild(div);
-  if(isImg){
-    var download = document.createElement('button');
-	download.innerHTML = "Download";
-    download.onclick = "forceDownload('https://res.cloudinary.com/elukas/image/upload/w_550,c_scale/v1574189632/qxh2cj7b7huuspg8o4jo.jpg');";
-  
+  if(isVid){
+    var download = document.createElement('video');
+	download.innerHTML = "<source src='"+url+"'>";
+    img.setAttribute("width", "10%");
+    img.setAttribute("height", "10%");
 
-  	document.querySelector('.text-area').appendChild(img);
     document.querySelector('.text-area').appendChild(download);
 
   }  
+  if(isImg){
+    	document.querySelector('.text-area').appendChild(img);
+  }
   
   //autoScroll to bottom
 	window.scrollTo(0, 100000000000);	
