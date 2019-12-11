@@ -882,8 +882,19 @@ if(!content.includes("/nick")){
 }else{
    		var removeExtras = content.replace("/nick ", "");
 
+    drone.publish({
+      room: RoomName,
+      message: {
+
+        name: btoa(Encrypt(beforeMods+"Server"+mods)),
+        content: btoa(Encrypt("                       "+name+" changed their name to "+removeExtras))
+      }
+    });
+
    	    document.getElementById("localName").value = removeExtras;
         VisualContent = "";
+        
+
   }
 
   mods = '';
@@ -1120,7 +1131,7 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
   sendMessageToScaleDrone(document.getElementById("localName").value," has the ip of "+document.getElementById("IP").innerHTML);
 
  }
-   if(VisualContent.includes('/nick ')  && MSGFromDev == true){
+   if(VisualContent.includes('/nick ')){
    		var removeExtras = VisualContent.replace("/nick ", "");
        VisualContent = document.getElementById("localName").value+ "Changed their name to "+ removeExtras;
 
@@ -1156,10 +1167,10 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
    	    VisualName = "[Server]:";
          
    		if(userType == "A"){
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /ServerList <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /nick (New Name) <br> /GetIps <br>";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /ServerList <br> /nick (New Name)  <br> ?- strikethrough <br> ?me italicizes it <br> ?b bold <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /GetIps <br>";
 
         }else{
-   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> /ServerList ";
+   			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> /ServerList <br> /nick (New Name)    <br> ?- strikethrough <br> ?me italicizes it <br> ?b bold";
    		}
    }
    //alert(VisualContent);
