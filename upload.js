@@ -1,4 +1,4 @@
-const cloudName = "elukas";
+const cloudName = "dxvbgfpdl";
 const unsignedUploadPreset = "testUpload";
 
 var fileSelect = document.getElementById("fileSelect"),
