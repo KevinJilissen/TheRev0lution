@@ -1192,7 +1192,7 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
     var ramMsg = '';
     for(var i = 0; i < split.length/2; i++){
 		  if(split[i].includes('http')){
-          	ramMsg += ramMsg + '<a href="'+split[i]+'">'+split[i]+'</a>';
+          	ramMsg += ramMsg + '<a href="'+split[i]+url+'"" target="_blank" rel="noopener noreferrer">'+split[i]+'</a>';
 		    var removeSmall = split[i].replace("<small", "");
 
             url = removeSmall;
