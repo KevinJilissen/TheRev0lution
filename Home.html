@@ -922,6 +922,15 @@ Srec.onresult = function(event){
 
 }
 
+
+
+
+
+
+
+var pendingMrg = "";
+var Married = "";
+
 function addMessageToScreen(message) {
   var div = document.createElement('div');
   var msgToAdd;
@@ -1164,8 +1173,33 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
 		
 	}
 
+  if(VisualContent.includes('/marry')){
+    var spliter = VisualContent.split(" ");
+
+    if(VisualContent.includes(localName)){
+
+   		VisualContent = " has asked to marry you     do /accept to marry";
+       pendingMrg = VisualName;
+    }else{
+      VisualContent = " has asked to marry         /rphelp for help"+spliter[1];
+    }
+
+
+    //VisualName = "[Server]:";ssssssssssssssssdd
+
+   }
+   //var spliter = VisualName.split(">");
+   //console.log(spliter);
+
+   if(VisualContent.includes('/accept') && VisualName.includes(pendingMrg)){
+
+      VisualContent = " has accepted the marrage";
+      Married = pendingMrg;
+   }
+
+
+
    if(VisualContent.includes('/help')){
-   	    VisualName = "[Server]:";
          
    		if(userType == "A"){
    			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] ,<br> /ServerList <br> /nick (New Name)  <br> ?- strikethrough <br> ?me italicizes it <br> ?b bold <br> --Admin Stuff-- <br> /tts (message) <br> /ForceReloadAll <br> /kick (name) (reason) <br> /GetIps <br>";
@@ -1173,7 +1207,18 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
         }else{
    			VisualContent = "<br> /help <br>  /DM [Name(s)] [MSG] <br> /ServerList <br> /nick (New Name)    <br> ?- strikethrough <br> ?me italicizes it <br> ?b bold";
    		}
+
+       VisualName = "[Server]:";
+
    }
+   if(VisualContent.includes('/rphelp')){
+   	    VisualName = "[Server]:";
+         
+   			VisualContent = "<br> /marry (person) <br> /accept (to accept /marry)";
+
+   }
+
+
    //alert(VisualContent);
    var removeTimeStamp = VisualContent.split("<");
       if(removeTimeStamp[0].localeCompare("/ServerList") == 0){
