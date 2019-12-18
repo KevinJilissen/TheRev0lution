@@ -1194,8 +1194,9 @@ if(VisualContent.includes('/GetIps') && MSGFromDev == true){
 
     var kissImgs = "https://media1.tenor.com/images/a2332f49f11038faa1a76b049d5d4818/tenor.gif https://media.tenor.com/images/212968460d01b4a00536de73b8486526/tenor.gif https://media.tenor.com/images/115058ffa644506e8d48207f58b97e3f/tenor.gif https://66.media.tumblr.com/134272ec206fa90ac500f158ebea07b4/tumblr_n2eq50zsCB1qbvovho7_500.gif";
     var splitI = kissImgs.split(" ");
-    //console.log(splitI);
-    VisualContent = splitI[Math.round(Math.random(splitI.length-1))];
+    console.log(Math.floor(Math.random(splitI.length)*splitI.length));
+    VisualContent = splitI[Math.floor(Math.random(splitI.length)*splitI.length)];
+
    }
    //var spliter = VisualName.split(">");
    //console.log(spliter);
