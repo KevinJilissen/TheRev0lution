@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="600" height="600"
+style="border:1px solid #c3c3c3;" onclick = "mousePressed = true; showCoords(event)" ondrag = "mousePressed = true; showCoords(event)" onmousemove="showCoords(event)">
+Your browser does not support the canvas element.
+</canvas>
+
+<p id="demo"></p>
+
+
+<script>
+
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var mouseX = 0;
+var mouseY = 0;
+var mousePressed = false;
+
+
+
+
+function showCoords(event) {
+  var x = event.clientX;
+  var y = event.clientY;
+  var coords = "X coords: " + x + ", Y coords: " + y + "  MOUSEC: "+mousePressed;
+  document.getElementById("demo").innerHTML = coords;
+  
+  mouseX = x;
+  mouseY = y;
+  
+}
+
+
+
+function update(progress) {
+  // Update the state of the world for the elapsed time since last render
+}
+
+function draw() {
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0,0,600,600);
+
+
+  // Draw the state of the world
+  ctx.fillStyle = "#FF0000";
+  ctx.fillRect(mouseX,mouseY,20,20);
+  
+  mousePressed = false;
+}
+
+function loop(timestamp) {
+  var progress = timestamp - lastRender;
+
+  update(progress);
+  draw();
+
+  lastRender = timestamp;
+  window.requestAnimationFrame(loop);
+}
+var lastRender = 0;
+window.requestAnimationFrame(loop);
+
+
+</script>
+
+</body>
+</html>
+
