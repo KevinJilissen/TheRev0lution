@@ -11,7 +11,6 @@
  * Also http://anmar.eu.org/projects/jssha2/
  */
 
-var sha256 = (function() {
 
 /*
  * Configurable variables. You may need to tweak these to be compatible with
@@ -350,4 +349,3 @@ return {
     any_hmac: any_hmac_sha256
 };
 
-}());
