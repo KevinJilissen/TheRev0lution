@@ -394,7 +394,13 @@ JoinServer();   "></input>
 
  </div>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
+ <script  src="https://kevinjilissen.github.io/TheRev0lution/sha.js"></script>
 <script>
+
+
+
+
+
   var Version = "0.0.3";
   var NextVersion = "0.0.4";
   var loading = true;
@@ -413,8 +419,10 @@ JoinServer();   "></input>
 
 
   var loggedIn = false;
-  var passcode = /*"dGVzdA=="*/"eWVz";
-  var adminCode = "d2luZHlsaWdodDEz";
+  const passcode = /*"dGVzdA=="*/"J4wLx6Zttjni7Ok4IsL5+bNZ+Fs4D7ChVkVsd8rRy0g";
+  const adminCode = "f7L935vyBSSi6IbWmWhW8OeyKgZEZHI6hPoCrmKp4m8";
+  const staffCode = "LYEpJRq+OwO1fviMf5G9o626w/wwrQWMjIWlifpZY2Y";
+
   var attempts = 3;
 
 
@@ -498,21 +506,18 @@ JoinServer();   "></input>
     
     var input = document.getElementById("pswrd").value;
     var localName = document.getElementById("localName").value;
-	const staffCode = "iYZgC5q2tQ4vjtFDQMsXYg==";
 
     //window.open("www.test.com");
-    if(input == atob(passcode) && attempts > 0 || input == atob(adminCode) && attempts > 0 || input == atob(staffCode) && attempts > 0 || input == "robby" && attempts > 0 || input == "snek" && attempts > 0){
-	/*if(input == "snek"){
-      document.getElementById('RoomName').value = "Kevin"; 
-      document.getElementById('RoomID').value = 'SmrEQk7hQ5IoQJGm';
-	}*/
+    console.log(sha256.b64(input, "Stop_Looking_In_My_Code_Boomer!"));
+    if(sha256.b64(input, "Stop_Looking_In_My_Code_Boomer!") == passcode && attempts > 0 || sha256.b64(input, "Stop_Looking_In_My_Code_Boomer!") == staffCode && attempts > 0 || sha256.b64(input, "Stop_Looking_In_My_Code_Boomer!") == adminCode && attempts > 0){
+
 
 
       //RoomID = document.getElementById("RoomID").value;
       //drone = new ScaleDrone(RoomID);
 
     sendMessageToScaleDrone("[Server]", localName + " joined the server");
-    	if(input == atob(adminCode) || input == atob(staffCode) || DevLogin){
+    	if(sha256.b64(input, "Stop_Looking_In_My_Code_Boomer!") == adminCode || sha256.b64(input, "Stop_Looking_In_My_Code_Boomer!") == staffCode || DevLogin){
         	userType = "A";
         }
     	//further verification TODO
@@ -1433,3 +1438,5 @@ console.log("%cWARNING: %s", css, '  Pasting anything in here could mess somthin
 
 
 <script  src="https://kevinjilissen.github.io/TheRev0lution/upload.js"></script>
+
+
